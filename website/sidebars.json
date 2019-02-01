@@ -1,0 +1,11 @@
+{
+  "docs": {
+    "Introduction": ["introduction/features","introduction/quickStart","introduction/examples","introduction/benchmarks"],
+    "Configuration": ["configuration/options","configuration/environments","configuration/directory-structure","configuration/middleware"],
+    "Server": ["server/controllers","server/routes","server/validation","server/errors","server/middleware2","modules/view","server/IRequest","server/IResponse"],
+    "Application": ["application/app","application/injector","application/bootstrap"],
+    "Modules": ["modules/simple-modules","modules/complex-modules","modules/logger","modules/view"],
+    "Injection": ["injection/dependency-injection","injection/define","injection/constructor-args","injection/singleton","injection/init-method","injection/inject","injection/factory","injection/alias","injection/lazy"]
+  }
+
+}
