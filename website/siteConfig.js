@@ -29,22 +29,24 @@ const siteConfig = {
 
     // For no header links in the top nav bar -> headerLinks: [],
     headerLinks: [
-        {doc: 'introduction/quickStart', label: 'Docs'},
+        {doc: 'introduction/quick-start', label: 'Documentation',icon:"aaaa"},
+        {href: "https://github.com/shmoop207/appolo", label: 'GitHub'},
+        { search: true }
     ],
 
     // If you have users set above, you add it here:
     users,
 
     /* path to images for header/footer */
-    headerIcon: 'img/docusaurus.svg',
+    headerIcon: 'img/appolo_fav.png',
     footerIcon: 'img/docusaurus.svg',
-    favicon: 'img/favicon.png',
+    favicon: 'img/appolo_fav.png',
 
 
     /* Colors for website */
     colors: {
-        primaryColor: '#2E8555',
-        secondaryColor: '#205C3B',
+        primaryColor: '#113B7B',
+        secondaryColor: '#113B7B',
     },
 
     /* Custom fonts for website */
@@ -60,7 +62,11 @@ const siteConfig = {
       ]
     },
     */
-
+    algolia: {
+        apiKey: 'my-api-key',
+        indexName: 'my-index-name',
+        algoliaOptions: {} // Optional, if provided by Algolia
+    },
     // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
     copyright: `Copyright © ${new Date().getFullYear()} Appolo`,
 
@@ -105,7 +111,7 @@ const siteConfig = {
 
     // You may provide arbitrary config keys to be used as needed by your
     // template. For example, if you need your repo's URL...
-    //   repoUrl: 'https://github.com/facebook/test-site',
+       repoUrl: 'https://github.com/shmoop207/appolo',
 };
 
 module.exports = siteConfig;

@@ -1,16 +1,231 @@
 /* your custom css */
 
+
+
+.fixedHeaderContainer{
+    background: #1252ac;
+    padding: 15px 0 ;
+
+}
+
+.headerWrapper{
+    z-index: 2;
+    position: relative;
+}
+
+.homeContainer{
+    background-color: #1252ac;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.homeContainer * {
+    box-sizing: inherit;
+}
+
+.promoSection .promoRow .pluginRowBlock{
+    justify-content: left;
+    margin: 0 -10px;
+
+}
+.promoSection .promoRow .pluginRowBlock .pluginWrapper{
+    padding: 0 10px;
+}
+
+.homeContainer::after,.fixedHeaderContainer::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-size: cover;
+    background-position: center 25%;
+    background-image: url('/img/sky-star-atmosphere-constellation-aviation-space-1262201-pxhere.com (1).jpg');
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.fixedHeaderContainer::after {
+    background-position: center 10%;
+
+}
+.docMainWrapper {
+    padding-top: 50px;
+}
+
+
+.mainContainer{
+    padding: 0;
+}
+.mainContainer img{
+    width:5vh;
+
+}
+
+.intro{
+    position: relative;
+    z-index: 2;
+}
+
+.intro .title{
+    flex: 1;
+    margin-top: 10px;
+
+}
+
+.intro {
+    display: flex;
+    align-items: center;
+
+}
+
+.intro > div {
+    flex: 1;
+
+}
+
+div.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.intro  h2{
+    text-align: left;
+    color: #fff;
+    font-size: 6vh;
+    font-weight: 500;
+    margin: 0 0 20px 0px;
+}
+
+.intro h4 {
+    color: white;
+    font-size: 1.5em;
+    margin-top:0px;
+    text-align: left;
+    letter-spacing: 1px;
+}
+
+.intro  img{
+    max-height: 27vh;
+}
+
+.promoRow .button{
+    color :#ffffff;
+    font-size: 0.8em;
+    border-color:#ffffff;
+    letter-spacing: 1px;
+
+}
+
+.blockElement{
+    margin-bottom:20px
+}
+
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+    .intro  img{
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 1024px) {
+
 }
 
 @media only screen and (max-width: 1023px) {
+    .intro  img{
+        display: none;
+    }
+
+    .navigationSlider .slidingNav ul{
+        background-color: #1252ac;
+
+    }
+
 }
 
 @media only screen and (min-width: 1400px) {
 }
 
 @media only screen and (min-width: 1500px) {
+}
+
+
+@font-face {
+    font-family: 'icomoon';
+    src:  url('fonts/icomoon.eot?sd0mji');
+    src:  url('fonts/icomoon.eot?sd0mji#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?sd0mji') format('truetype'),
+    url('fonts/icomoon.woff?sd0mji') format('woff'),
+    url('fonts/icomoon.svg?sd0mji#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    padding-right: 5px;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-group:before {
+    content: "\f0c0";
+}
+.icon-users:before {
+    content: "\f0c0";
+}
+.icon-magic:before {
+    content: "\f0d0";
+}
+.icon-sitemap:before {
+    content: "\f0e8";
+}
+.icon-fighter-jet:before {
+    content: "\f0fb";
+}
+.icon-github-alt:before {
+    content: "\f113";
+}
+.icon-flag-checkered:before {
+    content: "\f11e";
+}
+.icon-code-fork:before {
+    content: "\f126";
+}
+.icon-puzzle-piece:before {
+    content: "\f12e";
+}
+.icon-rocket:before {
+    content: "\f135";
+}
+.icon-cubes:before {
+    content: "\f1b3";
+}
+.icon-eyedropper:before {
+    content: "\f1fb";
+}
+.icon-leanpub:before {
+    content: "\f212";
+}
+.icon-hand-peace-o:before {
+    content: "\f25b";
+}
+
+
+@media only screen and (min-width: 736px){
+    .gridBlock > * {
+        margin: 20px 20px;
+    }
 }
