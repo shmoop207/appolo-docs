@@ -3,11 +3,12 @@ id: logger
 title: Logger
 sidebar_label: Logger
 ---
-logger module for appolo build with [pino](https://github.com/pinojs/pino) and [sentry](https://sentry.io) Installation
+logger module for appolo build with [pino](https://github.com/pinojs/pino) and [sentry](https://sentry.io)
+
+## Installation
 
 ```javascript
 npm i @appolo/logger
-
 ```
 
 ## Options

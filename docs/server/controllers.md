@@ -73,3 +73,17 @@ export class LoginController extends StaticController{
 }
 
 ```
+
+or with gzip decorator
+```javascript
+import {controller,singleton,inject,IRequest,IResponse} from 'appolo';
+@controller()
+export class LoginController extends StaticController{
+
+
+	@get("/some/data2")
+	@gzip()
+    public aynsc loginUser(req:IRequest,res:IResponse){
+        return {data:"some big data"}
+    }
+}

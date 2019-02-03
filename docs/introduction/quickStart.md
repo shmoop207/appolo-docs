@@ -20,5 +20,8 @@ npm install appolo --save
 ## Launch
 ```javascript
 var {createApp}  from 'appolo';
-createApp().launch();
+
+createApp()
+    .get("/some_path",(req,res)=> ({"working":true}))
+    .launch();
 ```
