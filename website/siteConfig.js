@@ -14,7 +14,7 @@ const users = [];
 const siteConfig = {
     title: 'Appolo', // Title for your website.
     tagline: 'Outer space server framework for Node.js',
-    url: 'https://your-docusaurus-test-site.com', // Your website URL
+    url: 'https://appolojs.com', // Your website URL
     baseUrl: '/', // Base URL for your project */
     // For github.io type URLs, you would set the url and baseUrl like:
     //   url: 'https://facebook.github.io',
@@ -45,8 +45,8 @@ const siteConfig = {
 
     /* Colors for website */
     colors: {
-        primaryColor: '#113B7B',
-        secondaryColor: '#113B7B',
+        primaryColor: '#3261a2',
+        secondaryColor: '#307b58',
     },
 
     /* Custom fonts for website */
@@ -63,8 +63,8 @@ const siteConfig = {
     },
     */
     algolia: {
-        apiKey: 'my-api-key',
-        indexName: 'my-index-name',
+        apiKey: '11edf3e157020af35ea1ba0698d3e67d',
+        indexName: 'appolo',
         algoliaOptions: {} // Optional, if provided by Algolia
     },
     // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.

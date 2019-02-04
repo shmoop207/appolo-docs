@@ -13,10 +13,16 @@
     position: relative;
 }
 
+/*a, a:hover,.toc .toggleNav ul li.navListItemActive a {*/
+    /*color: #2e8555;*/
+    /*text-decoration: none;*/
+/*}*/
+
 .homeContainer{
     background-color: #1252ac;
     position: relative;
     box-sizing: border-box;
+    box-shadow: 0 1px 10px rgba(0,0,0,.5)
 }
 
 .homeContainer * {
@@ -58,11 +64,19 @@
 .mainContainer{
     padding: 0;
 }
-.mainContainer img{
-    width:5vh;
 
+.mainContainer .container.paddingTop{
+    padding-top: 40px;
 }
 
+.blockContent div> p{
+    text-align: left;
+}
+
+.blockContent h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 .intro{
     position: relative;
     z-index: 2;
@@ -135,13 +149,25 @@ div.logo {
 }
 
 @media only screen and (max-width: 1023px) {
-    .intro  img{
+    .intro  .logo{
         display: none;
+    }
+
+    .intro .title  * {
+        text-align: center;
+    }
+
+    .promoSection .promoRow .pluginRowBlock{
+        justify-content: center;
     }
 
     .navigationSlider .slidingNav ul{
         background-color: #1252ac;
 
+    }
+
+    .docMainWrapper {
+        padding-top: 0px;
     }
 
 }
@@ -228,4 +254,8 @@ div.logo {
     .gridBlock > * {
         margin: 20px 20px;
     }
+
+
 }
+
+
