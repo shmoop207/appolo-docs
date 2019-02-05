@@ -40,7 +40,7 @@ const siteConfig = {
     /* path to images for header/footer */
     headerIcon: 'img/appolo_fav.png',
     footerIcon: 'img/docusaurus.svg',
-    favicon: 'img/appolo_fav.png',
+    favicon: 'img/favicon/appolo_fav.ico',
 
 
     /* Colors for website */
@@ -63,8 +63,8 @@ const siteConfig = {
     },
     */
     algolia: {
-        apiKey: '11edf3e157020af35ea1ba0698d3e67d',
-        indexName: 'appolo',
+        apiKey: '9380938731316e972c0f423c7839983b',
+        indexName: 'shmoop207_appolo',
         algoliaOptions: {} // Optional, if provided by Algolia
     },
     // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
