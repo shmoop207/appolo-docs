@@ -1,7 +1,7 @@
 ---
-id: pubsub
-title: PubSub
-sidebar_label: PubSub
+id: bus
+title: Bus
+sidebar_label: Bus
 ---
 pubsub module for `appolo` built with [ioredis](https://github.com/luin/ioredis#pubsub)
 

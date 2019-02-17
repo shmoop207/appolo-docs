@@ -3,7 +3,7 @@ id: socket
 title: Socket
 sidebar_label: Socket
 ---
-socket module for appolo build with [socket.io](https://socket.io/)
+socket module for appolo built with [socket.io](https://socket.io/)
 
 ## Installation
 

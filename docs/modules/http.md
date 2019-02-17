@@ -17,7 +17,7 @@ in config/modules/all.ts
 ## Options
 | key | Description | Type | Default
 | --- | --- | --- | --- |
-| `id` | `httpService` injection id | `string`|  `httpService`|
+| `id` | injection id | `string`|  `httpService`|
 
 any option from `Request Config` can be added and will be added to all request.
 
