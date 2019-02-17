@@ -3,7 +3,7 @@ id: http
 title: Http
 sidebar_label: Http
 ---
-http service module for `appolo` build with [axios](https://github.com/axios/axios)
+http service module for [`appolo`](https://github.com/shmoop207/appolo) build with [axios](https://github.com/axios/axios)
 
 ## Installation
 
