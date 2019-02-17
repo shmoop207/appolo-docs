@@ -1,6 +1,6 @@
 ---
 id: http
-title: Http
+title: HTTP Service
 sidebar_label: Http
 ---
 http service module for [`appolo`](https://github.com/shmoop207/appolo) build with [axios](https://github.com/axios/axios)
