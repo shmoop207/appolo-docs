@@ -60,7 +60,8 @@ export = async function (app: App) {
 
 ## Usage
 ```javascript
-import { cache,define } from 'appolo';
+import { define } from 'appolo';
+import { cache } from '@appolo/cache';
 
 @define()
 export class SomeClass {
