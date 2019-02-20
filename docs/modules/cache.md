@@ -78,13 +78,20 @@ export class SomeClass {
         return result;
     }
 
-     // will try to get items from memroy with expire
-     // of 1 minute then from redis with expire of one hour
+    // will try to get items from memroy with expire
+    // of 1 minute then from redis with expire of one hour
     @cache({db:true,maxAge:60*1000,:dbMaxAge:60*1000*60})
-        async method2(key:string) {
-            let result = await doSomeThingAsync(key)
+    async method3(key:string) {
+        let result = await doSomeThingAsync(key)
             return result;
-        }
+    }
+
+     // cache with custom key resolver
+     @cache({resolver:(key:string,key2:string)=>`${key}_${key2}`})
+     async method3(key:string,key2:string) {
+     let result = await doSomeThingAsync(key)
+        return result;
+     }
 }
 
 ```
