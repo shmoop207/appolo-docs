@@ -4,9 +4,9 @@
     "Configuration": ["configuration/options","configuration/environments","configuration/directory-structure","configuration/middleware"],
     "Server": ["server/controllers","server/routes","server/validation","server/errors","server/middleware2","modules/view","server/IRequest","server/IResponse"],
     "Application": ["application/app","application/injector","application/bootstrap"],
-    "Modules": ["modules/simple-modules","modules/complex-modules","modules/logger","modules/view","modules/context","modules/socket","modules/pubsub","modules/http"],
+    "Modules": ["modules/simple-modules","modules/complex-modules","modules/logger","modules/view","modules/context","modules/socket","modules/pubsub","modules/http","modules/bus","modules/cache"],
     "Injection": ["injection/dependency-injection","injection/define","injection/constructor-args","injection/singleton","injection/init-method","injection/inject","injection/factory","injection/alias","injection/lazy"],
-    "Utils":["util/event-dispatcher","util/cache","util/decorators"]
+    "Utils":["util/event-dispatcher","util/decorators"]
   }
 
 }
