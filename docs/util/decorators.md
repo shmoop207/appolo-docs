@@ -6,6 +6,57 @@ sidebar_label: Decorators
 
 Some useful decorators you can use on any method
 
+## Before
+run before class method before any method
+```javascript
+import {define,inject,before} from 'appolo';
+@define()
+export class SomeBefore  {
+    public async run(data){
+        data.count = 3
+    }
+}
+```
+
+now you can added before decorator on any method
+```javascript
+@define()
+export class SomeManager{
+
+    //the SomeBefore class will run before someAction with same arguments
+    @before<SomeBefore>(SomeBefore,(c=>c.run))
+    public async someAction(data){
+        return data.count + 1
+    }
+}
+```
+
+## After
+run after class method before any method
+```javascript
+import {define,inject,before} from 'appolo';
+@define()
+export class SomeAfter  {
+    public async run(counter){
+        return counter +1
+    }
+}
+```
+
+now you can added after decorator on any method
+```javascript
+@define()
+export class SomeManager{
+
+    //the SomeAfter class will run after someAction with someAction return argument
+    @before<SomeAfter>(SomeAfter,(c=>c.run))
+    public async someAction(){
+        return  1
+    }
+}
+```
+
+
 ## Delay
 delay call method by given time in milliseconds
 ```javascript
@@ -94,3 +145,4 @@ class SomeClass {
 //start the interval
 new SomeClass().method()
 ```
+
