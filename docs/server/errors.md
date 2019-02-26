@@ -41,3 +41,63 @@ export class LoginController extends Controller{
     "key":"value"
 }
 ```
+
+## Error Middleware
+you can define custom error middleware to handle route error.
+any express error middleware are also supported
+
+```javascript
+import {controller,inject,Controller,IRequest,IResponse,error} from 'appolo';
+
+@controller()
+@error(SomeErrorHandler)
+export class SomeController extends Controller{
+    @post("/some/path")
+    public async action(req:IRequest,res:IResponse,model:any){
+       throw new Error("some error")
+    }
+}
+```
+
+```javascript
+import {inject,Controller,IRequest,IResponse,error,Middleware} from 'appolo';
+
+@define()
+export class SomeErrorHandler extends Middleware{
+
+    catch(err:any,req:IRequest,res:IResponse,next:NextFn){
+        res.status(400).send("something went wrong")
+    }
+}
+```
+
+## Global Error handler
+global middleware will be run on all routes
+
+in config/middleware/all.ts
+```javascript
+export = function (app: App) {
+
+    app.error(function(err,res,req,next){
+        console.log(err)
+    });
+
+    app.error(SomeErrorHandler);
+}
+```
+
+## Not Found Route
+when route is not found HttpError is thrown with status 404
+you can catch the error by `get('*')` route or by error middleware
+
+in config/middleware/all.ts
+```javascript
+export = function (app: App) {
+
+    app.error(function(err,res,req,next){
+        if(err instanceof HttpError && err.statusCode == 404){
+            res.render("404.html")
+        }
+    });
+}
+```

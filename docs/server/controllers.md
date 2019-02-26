@@ -61,29 +61,65 @@ import {controller,singleton,inject,IRequest,IResponse} from 'appolo';
 export class LoginController extends StaticController{
 
     @get("/some/data")
-    public aynsc loginUser(req:IRequest,res:IResponse){
+    public aynsc loginUser1(req:IRequest,res:IResponse){
         res.gzip();
         return return {data:"some big data"}
 	}
 
 	@get("/some/data2")
-    public aynsc loginUser(req:IRequest,res:IResponse){
+    public aynsc loginUser2(req:IRequest,res:IResponse){
         res.gzip().send({data:"some big data"})
+    }
+
+    @get("/some/data3")
+    @gzip()
+    public aynsc loginUser3(req:IRequest,res:IResponse){
+        return {data:"some big data"}
     }
 }
 
 ```
 
-or with gzip decorator
+
+## Headers
+specify a custom response header
 ```javascript
-import {controller,singleton,inject,IRequest,IResponse} from 'appolo';
+import {controller,singleton,inject,IRequest,IResponse,header} from 'appolo';
 @controller()
 export class LoginController extends StaticController{
 
 
-	@get("/some/data2")
-	@gzip()
+	@get("/some/data")
+    @header('Cache-Control', 'none')
     public aynsc loginUser(req:IRequest,res:IResponse){
-        return {data:"some big data"}
+        return {data:"user"}
+    }
+
+    @get("/some/data2")
+    public aynsc loginUser(req:IRequest,res:IResponse){
+        res.header("Cache-Control","none")
+        return {data:"user"}
+    }
+}
+```
+
+## StatusCode
+specify a custom statusCode default `200`
+```javascript
+import {controller,singleton,inject,IRequest,IResponse,statusCode} from 'appolo';
+@controller()
+export class LoginController extends StaticController{
+
+
+	@get("/some/data")
+    @statusCode(201)
+    public aynsc loginUser(req:IRequest,res:IResponse){
+        return {data:"user"}
+    }
+
+    @get("/some/data2")
+    public aynsc loginUser(req:IRequest,res:IResponse){
+        res.status(201)
+        return {data:"user"}
     }
 }
