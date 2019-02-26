@@ -106,7 +106,7 @@ export class LoginController extends StaticController{
 ## StatusCode
 specify a custom statusCode default `200`
 ```javascript
-import {controller,singleton,inject,IRequest,IResponse,statusCode} from 'appolo';
+import {controller,IRequest,IResponse,statusCode} from 'appolo';
 @controller()
 export class LoginController extends StaticController{
 
@@ -123,3 +123,26 @@ export class LoginController extends StaticController{
         return {data:"user"}
     }
 }
+```
+
+## Custom Decorators
+you can define your own custom response decorators
+
+```javascript
+import {controller,IRequest,IResponse,customRouteDecorator} from 'appolo';
+
+let myDecorator = customRouteDecorator((req:IRequest,res:IResponse,route)=>{
+    res.setHeader("x-test","true")
+    res.status(201)
+}
+
+@controller()
+export class LoginController extends StaticController{
+
+	@get("/some/data")
+    @myDecorator
+    public aynsc loginUser(req:IRequest,res:IResponse){
+        return {data:"user"}
+    }
+}
+```
