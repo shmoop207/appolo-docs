@@ -53,7 +53,73 @@ export class LoginController extends StaticController{
 
 ```
 
-## Gzip
+## Custom Response Decorators
+you can define your own custom response decorators
+
+```javascript
+import {controller,IRequest,IResponse,customRouteDecorator} from 'appolo';
+
+let myDecorator = customRouteDecorator((req:IRequest,res:IResponse,route)=>{
+    res.setHeader("x-test","true")
+    res.status(201)
+}
+
+@controller()
+export class LoginController extends StaticController{
+
+	@get("/some/data")
+    @myDecorator
+    public aynsc loginUser(req:IRequest,res:IResponse){
+        return {data:"user"}
+    }
+}
+```
+
+### StatusCode
+specify a custom statusCode default `200`
+```javascript
+import {controller,IRequest,IResponse,statusCode} from 'appolo';
+@controller()
+export class LoginController extends StaticController{
+
+
+	@get("/some/data")
+    @statusCode(201)
+    public aynsc loginUser(req:IRequest,res:IResponse){
+        return {data:"user"}
+    }
+
+    @get("/some/data2")
+    public aynsc loginUser(req:IRequest,res:IResponse){
+        res.status(201)
+        return {data:"user"}
+    }
+}
+```
+
+### Headers
+specify a custom response header
+```javascript
+import {controller,singleton,inject,IRequest,IResponse,header} from 'appolo';
+@controller()
+export class LoginController extends StaticController{
+
+
+	@get("/some/data")
+    @header('Cache-Control', 'none')
+    public aynsc loginUser(req:IRequest,res:IResponse){
+        return {data:"user"}
+    }
+
+    @get("/some/data2")
+    public aynsc loginUser(req:IRequest,res:IResponse){
+        res.header("Cache-Control","none")
+        return {data:"user"}
+    }
+}
+```
+
+### Gzip
 it is possible to compress the response with gzip by calling `res.gzip`
 ```javascript
 import {controller,singleton,inject,IRequest,IResponse} from 'appolo';
@@ -80,69 +146,43 @@ export class LoginController extends StaticController{
 
 ```
 
+## Custom Params Decorators
+you can define you own custom action parameters
 
-## Headers
-specify a custom response header
 ```javascript
-import {controller,singleton,inject,IRequest,IResponse,header} from 'appolo';
+import {controller,IRequest,IResponse,customRouteParam} from 'appolo';
+
+let user = customRouteParam((req:IRequest,res:IResponse,route)=>{
+    return res.body["userId"]
+}
+
 @controller()
 export class LoginController extends StaticController{
 
-
-	@get("/some/data")
-    @header('Cache-Control', 'none')
-    public aynsc loginUser(req:IRequest,res:IResponse){
-        return {data:"user"}
-    }
-
-    @get("/some/data2")
-    public aynsc loginUser(req:IRequest,res:IResponse){
-        res.header("Cache-Control","none")
-        return {data:"user"}
+	@post("/some/data")
+    public aynsc loginUser(@user user:string){
+        return {data:user}
     }
 }
 ```
+- `@body(param?: string)` - return `req.body[param]` or `req.body`
+- `@query(param?: string)` - return `req.query[param]` or `req.query`
+- `@headers(param?: string)` - return `req.headers[param]` or `req.headers`
+- `@params(param?: string)` - return `req.params[param]` or `req.params`
+- `@model(param?: string)` - return `req.model[param]` or `req.model`
+- `@req()` - return `req`
+- `@res()` - return `res`
 
-## StatusCode
-specify a custom statusCode default `200`
-```javascript
-import {controller,IRequest,IResponse,statusCode} from 'appolo';
-@controller()
-export class LoginController extends StaticController{
-
-
-	@get("/some/data")
-    @statusCode(201)
-    public aynsc loginUser(req:IRequest,res:IResponse){
-        return {data:"user"}
-    }
-
-    @get("/some/data2")
-    public aynsc loginUser(req:IRequest,res:IResponse){
-        res.status(201)
-        return {data:"user"}
-    }
-}
-```
-
-## Custom Decorators
-you can define your own custom response decorators
 
 ```javascript
-import {controller,IRequest,IResponse,customRouteDecorator} from 'appolo';
-
-let myDecorator = customRouteDecorator((req:IRequest,res:IResponse,route)=>{
-    res.setHeader("x-test","true")
-    res.status(201)
-}
+import {controller,IRequest,IResponse,customRouteParam} from 'appolo';
 
 @controller()
 export class LoginController extends StaticController{
 
-	@get("/some/data")
-    @myDecorator
-    public aynsc loginUser(req:IRequest,res:IResponse){
-        return {data:"user"}
+	@post("/some/data")
+    public aynsc loginUser(@body("user") user:string,@headers("user-agent") agent){
+        return {data:user,agent}
     }
 }
 ```
