@@ -98,19 +98,22 @@ export class SomeClass {
 ```
 
 ## CacheProvider
-### `createCache(options: ICacheOptions, valueFn: Function, scope?: any)`
+### `createCache`
+#### `createCache(options: ICacheOptions, valueFn: Function, scope?: any)`
 create new cache wrapper
 - options - cache options
 - valueFn - value function will be called to get the value
 - scope - scope of the value function
 
-### `getCacheById(id:string):Cache`
+### `getCacheById`
+#### `getCacheById(id:string):Cache`
 return cache wrapper by id
 
 ## Cache
 cache wrapper instance
 
-### `get<T>(...args: any[]): Promise<T> | T`
+### `get`
+#### `get<T>(...args: any[]): Promise<T> | T`
 get value from cache if not found the value fn will be called
-### `get cache`
-return [`appolo-cache​`](https://github.com/shmoop207/appolo-cache) instance
+### `cache`
+getter return [`appolo-cache​`](https://github.com/shmoop207/appolo-cache) instance

@@ -87,10 +87,15 @@ export class MySocketController extends SocketController {
 }
 ```
 
-### Methods
-- `get socket(): socketIo.Socket` - return `socket` instance
-- `get id(): string` - return `socket` id
-- `send(event: string, data: any)`  - emit socket event
+### `socket`
+#### `get socket(): socketIo.Socket`
+getter return `socket` instance
+### `id`
+#### `get id(): string`
+getter return `socket` id
+### `send`
+#### `send(event: string, data: any)`
+emit socket event
 
 ## Middleware
 Middleware can be used before socket connect
@@ -149,8 +154,13 @@ export class SomeManager  {
     }
 }
 ```
+### `sendToAll`
+#### `sendToAll(event: string, data: any)`
+event message to all clients
 
-### Methods
-- `sendToAll(event: string, data: any)` - event message to all clients
-- `sendToNamespace(namespace: string, event: string, data: any)` - event message to all clients in a namespace
-- `get clients(): Map<string, SocketController>` - Map of all sockets by id
+### `sendToNamespace`
+#### `sendToNamespace(namespace: string, event: string, data: any)`
+event message to all clients in a namespace
+### `clients`
+#### `get clients(): Map<string, SocketController>`
+getter Map of all sockets by id

@@ -165,6 +165,7 @@ export class LoginController extends StaticController{
     }
 }
 ```
+built in custom params decorators
 - `@body(param?: string)` - return `req.body[param]` or `req.body`
 - `@query(param?: string)` - return `req.query[param]` or `req.query`
 - `@headers(param?: string)` - return `req.headers[param]` or `req.headers`
@@ -175,7 +176,7 @@ export class LoginController extends StaticController{
 
 
 ```javascript
-import {controller,IRequest,IResponse,customRouteParam} from 'appolo';
+import {controller,IRequest,IResponse,headers,body} from 'appolo';
 
 @controller()
 export class LoginController extends StaticController{

@@ -225,43 +225,54 @@ each handler and reply handler called with message object
 }
 ```
 
-### `message.ack()`
+### `ack`
+#### `message.ack()`
 Enqueues the message for acknowledgement.
 
-### `message.nack()`
+### `reject`
+#### `message.nack()`
 Enqueues the message for rejection. This will re-enqueue the message.
 
-### `message.reject()`
+### `reject`
+#### `message.reject()`
 Rejects the message without re-queueing it. Please use with caution and consider having a dead-letter-exchange assigned to the queue before using this feature.
 
-### `message.reply( data:any )`
+### `reply`
+#### `reply( data:any )`
 Acknowledges the messages and sends the message back to the requestor.
 
-### `message.replySuccess( data:T )`
+### `replySuccess`
+#### `replySuccess( data:T )`
 reply the message with json object `{success: true,data}`
 
-### `message.replyError( e: RequestError<T> )`
+### `replyError`
+#### `message.replyError( e: RequestError<T> )`
 reply the message with json object `{success: false,message: e.message, data:e.data}`
 
 ## BusProvider
 
-### initialize()
+### `initialize`
+#### initialize()
 initialize busProvider and start listen to events if not in in `auto` mode
 
-### `publish(type: string, data: any, expire?: number): Promise<void>`
+### `publish`
+#### `publish(type: string, data: any, expire?: number): Promise<void>`
 publish event
 - type -  event name
 - data - any data
 - expire - timeout until the message is expired in the queue
 
-### `request<T>(type: string, data: any, expire?: number): Promise<T>`
+### `request`
+#### `request<T>(type: string, data: any, expire?: number): Promise<T>`
 request data by event return promise with event response
 - type -  event name
 - data - any data
 - expire - timeout until the request is rejected
 
-### `close<T>(): Promise<void>`
+### `close`
+#### `close<T>(): Promise<void>`
 close the connection and clean all handlers
 
-### `getQueueMessagesCount(): Promise<number>`
+### `getQueueMessagesCount`
+#### `getQueueMessagesCount(): Promise<number>`
 return number of pending events in the queue
