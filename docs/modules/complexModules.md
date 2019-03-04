@@ -29,7 +29,7 @@ module env will be merged with module parent env.
 each module must inherit from `appolo.Module`
 
 in monitorModule.ts
-```javascript
+```typescript
 import {Module, module} from 'appolo';
 import {MonitorController} from "./src/monitorController";
 
@@ -41,7 +41,7 @@ export class MonitorModule extends Module {
 }
 ```
 in src/monitorController.ts
-```javascript
+```typescript
 import {Controller, controller, get, inject} from 'appolo';
 import {IEnv} from "./config/env/IEnv";
 
@@ -58,7 +58,7 @@ export class MonitorController extends Controller {
 
 ```
 now in the main app modules
-```javascript
+```typescript
 export = async function (env, app: App) {
     await app.module(MonitorModule)
 }
@@ -69,7 +69,7 @@ now monitoring controller is part of our app the the route `/api/monitor` in ava
 
 ## Module Options
 module options are define in the module constructor and can injected in any module class
-```javascript
+```typescript
 @module({
     exports: [MonitorController]
 })
@@ -79,7 +79,7 @@ export class MonitorModule extends Module {
     }
 }
 ```
-```javascript
+```typescript
 @controller("/api/monitor")
 export class MonitorController extends Controller {
 
@@ -91,7 +91,7 @@ export class MonitorController extends Controller {
     }
 }
 ```
-```javascript
+```typescript
 export = async function (env, app: App) {
     await app.module(new MonitorModule({id:"someId"}))
 }
@@ -102,7 +102,7 @@ the options passed to constructor will be extended with default module options
 | `immediate` |  module will be loaded immediately when called | `boolean`|  `false`|
 | `parallel` | module will be loaded in parallel modules | `boolean` | `false` |
 
-```javascript
+```typescript
 @module({
     exports: [MonitorController]
     immediate:true
@@ -115,7 +115,7 @@ export class MonitorModule extends Module {
 ```
 
 or
-```javascript
+```typescript
 export = async function (env, app: App) {
     await app.module(new MonitorModule({id:"someId",immediate:true}))
 }
@@ -125,7 +125,7 @@ export = async function (env, app: App) {
 module can use all appolo features like async factories.<br>
 the app will be launched when all modules finished loading
 
-```javascript
+```typescript
 @module()
 export class DbModule extends Module<{ id: string }> {
 
@@ -142,7 +142,7 @@ export class DbModule extends Module<{ id: string }> {
 }
 ```
 this will inject to main app id db this instance return from db factory
-```javascript
+```typescript
 import mongoose = require('mongoose');
 
 @define()
@@ -161,13 +161,13 @@ export class DbFactory implements IFactory<mongoose.Connection> {
 
 ```
 in the main app load the db module
-```javascript
+```typescript
 export = async function (env, app: App) {
     await app.module(new DbModule({conn:"mongo://someurl"}))
 }
 ```
 now you can inject the db instance anywhere in the main app
-```javascript
+```typescript
 @define()
 export class SomeManager{
     @inject() db:mongoose.Connection
@@ -182,7 +182,7 @@ export class SomeManager{
 
 ## Dependency injection
 inner module can inject instance from parent apps
-```javascript
+```typescript
 @define()
 @singleton()
 export class DbManager {
@@ -196,7 +196,7 @@ it will look the logger instance first in the module injector if not found it wi
 - `afterInitialize` - called after module initialize
 - `beforeLaunch` - called after module launch
 
-```javascript
+```typescript
 @module()
 export class DbModule extends Module<{ id: string }> {
 

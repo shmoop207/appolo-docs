@@ -5,7 +5,7 @@ sidebar_label: Inject
 ---
 
 `@inject` will try to inject object id to the same property name.
-```javascript
+```typescript
 @define()
 @singleton()
 class FooManager{
@@ -31,7 +31,7 @@ console.log(buzzController.name) // foobar
 
 ## Inject Instance By Name
 you can set the name of the property the object will be injected to.
-```javascript
+```typescript
 @define()
 @singleton()
 class FooManager{
@@ -55,7 +55,7 @@ console.log(buzzController.name) // foobar
 ```
 
 ## Inject Property Value
-```javascript
+```typescript
 @define()
 class FooManager{
     @injectValue('foo') name:string
@@ -75,7 +75,7 @@ console.log(buzzController.name()) // foo
 
 ## Inject Method Param
 you can inject instance to method param to any function.
-```javascript
+```typescript
 @define()
 class FooManager{
     get name () {return "foo"}
@@ -95,7 +95,7 @@ console.log(buzzController.name()) // foo
 ## Inject Factory Method
 factory method is a function that will return the injected object.
 this is useful the create many instances of the same class.
-```javascript
+```typescript
 @define()
 class  Person{
     constructor (name) {
@@ -116,7 +116,7 @@ console.log(fooController.name) // foo
 ## Inject Property Array
 you can inject array of properties by reference or by value.
 
-```javascript
+```typescript
 @define()
 @singleton()
 class FooManager{
@@ -143,7 +143,7 @@ buzzController.name // foobar
 ## Inject Property Dictionary
 you can inject dictionary of properties by reference or by value.
 
-```javascript
+```typescript
 @define()
 @singleton()
 class FooManager{
@@ -167,7 +167,7 @@ buzzController.name // foobarbaz
 ```
 ## Inject Property From Object Property
 you can inject property from other object property.
-```javascript
+```typescript
 @define()
 @singleton()
 class FooManager{

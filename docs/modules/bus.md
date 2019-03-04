@@ -7,7 +7,7 @@ bus module for [`appolo`](https://github.com/shmoop207/appolo) built with [rabbo
 
 ## Installation
 
-```javascript
+```typescript
 npm i @appolo/bus
 ```
 
@@ -55,7 +55,7 @@ npm i @appolo/bus
 | `expires` | time in ms before a queue with 0 consumers expires | 2^32 | |
 in config/modules/all.ts
 
-```javascript
+```typescript
 import {PubSubModule} from '@appolo/pubsub';
 
 export = async function (app: App) {
@@ -66,7 +66,7 @@ export = async function (app: App) {
 ## Usage
 
 ### Publisher
-```javascript
+```typescript
 import {define, singleton} from 'appolo'
 import {publisher} from "@appolo/bus";
 
@@ -81,7 +81,7 @@ export class SomePublisher {
 }
 ```
 Or with BusProvider
-```javascript
+```typescript
 @define()
 @singleton()
 export class SomePublisher {
@@ -98,7 +98,7 @@ export class SomePublisher {
 if you don not call msg ack or nack
 it will be called on handler return `msg.ack()` or `msg.nack()` on error
 
-```javascript
+```typescript
 import {define, singleton} from 'appolo'
 import {handler} from "@appolo/bus";
 
@@ -127,7 +127,7 @@ export class SomeHandler {
 ```
 
 ### Request
-```javascript
+```typescript
 import {define, singleton} from 'appolo'
 import {request} from "@appolo/bus";
 
@@ -148,7 +148,7 @@ export class SomePublisher {
 }
 ```
 Or with BusProvider
-```javascript
+```typescript
 @define()
 @singleton()
 export class SomePublisher {
@@ -166,7 +166,7 @@ export class SomePublisher {
 
 ### Reply
 
-```javascript
+```typescript
 import {define, singleton} from 'appolo'
 import {handler} from "@appolo/bus";
 
@@ -199,7 +199,7 @@ export class SomeHandler {
 
 ## IMessage
 each handler and reply handler called with message object
-```javascript
+```typescript
 {
   // metadata specific to routing & delivery
   fields: {
@@ -225,54 +225,54 @@ each handler and reply handler called with message object
 }
 ```
 
-### `ack`
+### ack
 #### `message.ack()`
 Enqueues the message for acknowledgement.
 
-### `reject`
+### reject
 #### `message.nack()`
 Enqueues the message for rejection. This will re-enqueue the message.
 
-### `reject`
+### reject
 #### `message.reject()`
 Rejects the message without re-queueing it. Please use with caution and consider having a dead-letter-exchange assigned to the queue before using this feature.
 
-### `reply`
+### reply
 #### `reply( data:any )`
 Acknowledges the messages and sends the message back to the requestor.
 
-### `replySuccess`
+### replySuccess
 #### `replySuccess( data:T )`
 reply the message with json object `{success: true,data}`
 
-### `replyError`
+### replyError
 #### `message.replyError( e: RequestError<T> )`
 reply the message with json object `{success: false,message: e.message, data:e.data}`
 
 ## BusProvider
 
-### `initialize`
-#### initialize()
+### initialize
+#### `initialize()`
 initialize busProvider and start listen to events if not in in `auto` mode
 
-### `publish`
+### publish
 #### `publish(type: string, data: any, expire?: number): Promise<void>`
 publish event
 - type -  event name
 - data - any data
 - expire - timeout until the message is expired in the queue
 
-### `request`
+### request
 #### `request<T>(type: string, data: any, expire?: number): Promise<T>`
 request data by event return promise with event response
 - type -  event name
 - data - any data
 - expire - timeout until the request is rejected
 
-### `close`
+### close
 #### `close<T>(): Promise<void>`
 close the connection and clean all handlers
 
-### `getQueueMessagesCount`
+### getQueueMessagesCount
 #### `getQueueMessagesCount(): Promise<number>`
 return number of pending events in the queue

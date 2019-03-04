@@ -8,7 +8,7 @@ You can add validations to your routes. The action controller will be called onl
 Validations are done using [joi module](https://github.com/hapijs/joi  ).<br/>
 The validator takes request params from `req.param` , `req.query` and `req.body`. After validation, all request params will be available on `req.model`.
 
-```javascript
+```typescript
 import {controller,inject,Controller,IRequest,IResponse,validator,get} from 'appolo';
 @controller()
 export class TestController extends Controller{
@@ -27,7 +27,7 @@ export class TestController extends Controller{
 }
 ```
 If the request params are not valid, appolo will return a `400 Bad Request` response with detailed validation errors.
-```javascript
+```typescript
 {
     status: 400,
     message: "Bad Request",
@@ -36,7 +36,7 @@ If the request params are not valid, appolo will return a `400 Bad Request` resp
 
 ## Validation Model
 `appolo` also supports validation model
-```javascript
+```typescript
 export class SearchModel extends RouteModel {
     @validationParam(validator.string().required())
     search: string;
@@ -50,7 +50,7 @@ export class SearchModel extends RouteModel {
 ```
 
 then in the controller
-```javascript
+```typescript
 import {controller,inject,Controller,IRequest,IResponse,validator,get} from 'appolo';
 @controller()
 export class TestController extends Controller{

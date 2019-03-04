@@ -7,7 +7,7 @@ http service module for [`appolo`](https://github.com/shmoop207/appolo) build wi
 
 ## Installation
 
-```javascript
+```typescript
 npm i @appolo/http
 ```
 
@@ -21,7 +21,7 @@ in config/modules/all.ts
 
 any option from `Request Config` can be added and will be added to all request.
 
-```javascript
+```typescript
 import {HttpModule} from '@appolo/http';
 
 export = async function (app: App) {
@@ -31,7 +31,7 @@ export = async function (app: App) {
 
 ## Usage
 
-```javascript
+```typescript
 import {define, singleton,inject} from 'appolo'
 import {publisher} from "@appolo/http";
 

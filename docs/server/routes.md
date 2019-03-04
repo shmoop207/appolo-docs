@@ -15,7 +15,7 @@ Each route class has the following methods:
  - `middleware` - middleware function the will be invoked before the controller. If the `next` function is not called or called with an error, the controller won`t be created.
  - `validation` - validations object as defined in [joi](https://github.com/hapijs/joi  ).
 
-```javascript
+```typescript
 import {define,inject,Controller,IRequest,IResponse,get,post} from 'appolo';
 
 @controller("/api/v1/")
@@ -37,7 +37,7 @@ export class TestController extends Controller{
 > `@controller("/api/v1/")` will add `/api/v1/` prefix to all routes in this controller
 
 You can return response by using `res.send`
-```javascript
+```typescript
 @controller()
 export class Test2Controller extends Controller{
    @inject() dataManager:DataManager
@@ -52,7 +52,7 @@ export class Test2Controller extends Controller{
 ```
 
 You can also define routes using appolo.route method:
-```javascript
+```typescript
 import {controller,inject,Controller,IRequest,IResponse} from 'appolo';
 
 @controller()
@@ -70,7 +70,7 @@ app.route<TestController>(TestController)
 ```
 
 you can catch not found routes using `*`
-```javascript
+```typescript
 @controller()
 export class TestController extends Controller{
 

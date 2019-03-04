@@ -7,7 +7,7 @@ logger module for appolo build with [pino](https://github.com/pinojs/pino) and [
 
 ## Installation
 
-```javascript
+```typescript
 npm i @appolo/logger
 ```
 
@@ -21,7 +21,7 @@ npm i @appolo/logger
 
 in config/modules/all.ts
 
-```javascript
+```typescript
 import {LoggerModule} from '@appolo/logger';
 
 export = async function (app: App) {
@@ -33,7 +33,7 @@ export = async function (app: App) {
 
 ## Usage
 now logger instance can be inject
-```javascript
+```typescript
 import {ILogger} from '@appolo/logger';
 
 @define()
@@ -51,7 +51,7 @@ export class SomeManager(){
 
 ```
 static logger
-```javascript
+```typescript
 import {Logger} from '@appolo/logger';
 
 @define()

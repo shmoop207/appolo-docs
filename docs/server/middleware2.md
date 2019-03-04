@@ -7,7 +7,7 @@ sidebar_label: Middleware
 A middleware class will run before the action of the controller is invoked.
 The middleware class must extend must extend `appolo.Middleware` and implement the run method.
 
-```javascript
+```typescript
 import {define,inject,Middleware,IRequest,IResponse,NextFn,IRouteOptions} from 'appolo';
 @define()
 export class AuthMiddleware extends Middleware {
@@ -25,7 +25,7 @@ export class AuthMiddleware extends Middleware {
 ```
 
 now you can added the middleware to our route
-```javascript
+```typescript
 @controller()
 export class LoginController extends Controller{
     @post("/someroute/")
@@ -37,7 +37,7 @@ export class LoginController extends Controller{
 ```
 ## Express Like Middleware
 you can also use any express or custom middleware functions
-```javascript
+```typescript
 
 const someMiddleware = (req,res,next)=>{
     req.uesr = "aa";

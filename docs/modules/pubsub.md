@@ -7,7 +7,7 @@ pubsub module for `appolo` built with [ioredis](https://github.com/luin/ioredis#
 
 ## Installation
 
-```javascript
+```typescript
 npm i @appolo/pubsub
 ```
 
@@ -20,7 +20,7 @@ npm i @appolo/pubsub
 
 in config/modules/all.ts
 
-```javascript
+```typescript
 import {PubSubModule} from '@appolo/pubsub';
 
 export = async function (app: App) {
@@ -31,7 +31,7 @@ export = async function (app: App) {
 ## Usage
 
 ### Publisher
-```javascript
+```typescript
 import {define, singleton} from 'appolo'
 import {publisher} from "@appolo/pubsub";
 
@@ -46,7 +46,7 @@ export class SomePublisher {
 }
 ```
 Or with PubSubProvider
-```javascript
+```typescript
 @define()
 @singleton()
 export class SomePublisher {
@@ -60,7 +60,7 @@ export class SomePublisher {
 
 ```
 ### Handler
-```javascript
+```typescript
 import {define, singleton} from 'appolo'
 import {handler} from "@appolo/pubsub";
 

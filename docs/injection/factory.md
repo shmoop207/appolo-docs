@@ -9,7 +9,7 @@ the `get` method can return promise;
 
 the return value of the get method will be injected to the inject properties;
 
-```javascript
+```typescript
 @define()
 @singleton()
 class BarManager{

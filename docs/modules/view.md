@@ -7,7 +7,7 @@ appolo view module
 ## Installation
 the view engine must be installed in  `package.json` in the example `npm i nunjucks`.
 
-```javascript
+```typescript
 npm i @appolo/view
 npm i nunjucks
 ```
@@ -23,7 +23,7 @@ npm i nunjucks
 
 in config/modules/all.ts
 
-```javascript
+```typescript
 import {App} from 'appolo';
 import {ViewModule,ViewEngines} from '@appolo/view';
 
@@ -38,7 +38,7 @@ export = async function (app:App) {
 ## Usage
 
 now you can use the res.render function in the controller
-```javascript
+```typescript
 import {controller, inject, IResponse, get, StaticController} from 'appolo';
 
 @controller()
@@ -53,7 +53,7 @@ export class ViewController extends StaticController {
 ```
 
 if the path is not defined the view will be searched in the same folder as the controller and file name as the action in the example below it will search for `view2.html`
-```javascript
+```typescript
 import {controller, inject, IResponse, get, StaticController} from 'appolo';
 
 @controller()
@@ -67,7 +67,7 @@ export class ViewController extends StaticController {
 ```
 
 the view can be rendered with `view` decorator
-```javascript
+```typescript
 import {controller, inject, IResponse, get, StaticController} from 'appolo';
 import {view} from '@appolo/view';
 
@@ -83,7 +83,7 @@ export class ViewController extends StaticController {
 }
 ```
 promises also supported
-```javascript
+```typescript
 import {controller, inject, IResponse, get, StaticController} from 'appolo';
 import {view} from '@appolo/view';
 

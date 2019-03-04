@@ -8,7 +8,7 @@ You can configure express middleware or add custom middleware by adding configur
 The express configuration file is called after the environment files were loaded.
 
 in file config/middleware/all.ts
-```javascript
+```typescript
 import favicon = require('static-favicon');
 import bodyParser = require("body-parser");
 import {App,IRequest,IResponse,NextFn}  from 'appolo';

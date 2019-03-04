@@ -5,7 +5,7 @@ sidebar_label: Singleton
 ---
 
 the class will be created only once and injector will return the same instance every time.
-```javascript
+```typescript
 @define()
 @singleton()
 export class FooController{}

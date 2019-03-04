@@ -8,7 +8,7 @@ Some useful decorators you can use on any method
 
 ## Before
 run before class method before any method
-```javascript
+```typescript
 import {define,inject,before} from 'appolo';
 @define()
 export class SomeBefore  {
@@ -19,7 +19,7 @@ export class SomeBefore  {
 ```
 
 now you can added before decorator on any method
-```javascript
+```typescript
 @define()
 export class SomeManager{
 
@@ -33,7 +33,7 @@ export class SomeManager{
 
 ## After
 run after class method before any method
-```javascript
+```typescript
 import {define,inject,before} from 'appolo';
 @define()
 export class SomeAfter  {
@@ -44,7 +44,7 @@ export class SomeAfter  {
 ```
 
 now you can added after decorator on any method
-```javascript
+```typescript
 @define()
 export class SomeManager{
 
@@ -59,7 +59,7 @@ export class SomeManager{
 
 ## Delay
 delay call method by given time in milliseconds
-```javascript
+```typescript
 import { delay } from 'appolo';
 
 class SomeClass {
@@ -71,7 +71,7 @@ class SomeClass {
 ```
 ## Bind
 bind method to class instance
-```javascript
+```typescript
 import { bind } from 'appolo-decorators';
 
 class SomeClass {
@@ -85,7 +85,7 @@ document.body.addEventListener('click', new SomeClass().method);
 ```
 ## Debounce
 debounce method using lodash debounce
-```javascript
+```typescript
 import { debounce } from 'appolo';
 
 class SomeClass {
@@ -97,7 +97,7 @@ class SomeClass {
 ```
 ## Throttle
 throttle method using lodash debounce
-```javascript
+```typescript
 import { throttle } from 'appolo';
 
 class SomeClass {
@@ -109,7 +109,7 @@ class SomeClass {
 ```
 ## Memoize
 memoize method using lodash debounce
-```javascript
+```typescript
 import { memoize } from 'appolo';
 
 class SomeClass {
@@ -121,7 +121,7 @@ class SomeClass {
 ```
 ## Once
 method will be called max n times and return last call result
-```javascript
+```typescript
 import { once } from 'appolo';
 
 class SomeClass {
@@ -133,7 +133,7 @@ class SomeClass {
 ```
 ## Interval
 setInterval to method once called
-```javascript
+```typescript
 import { interval } from 'appolo';
 
 class SomeClass {

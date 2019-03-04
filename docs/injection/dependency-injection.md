@@ -11,7 +11,7 @@ It enables you to write organised, testable code based on the [loose coupling](h
 You can always access the injector via `app.injector`.
 
 ## Usage
-```javascript
+```typescript
 import {define,singleton,initMethod,inject,IFactory,factory} from 'appolo';
 
 @define()
@@ -21,7 +21,7 @@ export class DataRemoteManager {
 }
 ```
 
-```javascript
+```typescript
 @define()
 @singleton()
 @factory()
@@ -35,7 +35,7 @@ export class DataManager implement IFactory<IDataManager> {
 
 ```
 
-```javascript
+```typescript
 @controller()
 export class FooController{
     @inject() dataManager:IDataManager
@@ -57,7 +57,7 @@ export class FooController{
 
 ## Constructor Injection
 Using constructor injection or method parameter injection
-```javascript
+```typescript
 import {define,singleton,injectParam,initMethod,inject} from 'appolo';
 @define()
 @singleton()
@@ -87,7 +87,7 @@ Inherited injections are supported as well.
 Anything you inject on a base class will be available to child classes.
 
 
-```javascript
+```typescript
 import {define,initMethod,inject} from 'appolo';
 
 export class BaseManager {

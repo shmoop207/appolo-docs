@@ -7,7 +7,7 @@ Redis module for [`appolo`](https://github.com/shmoop207/appolo) built with [ior
 
 ## Installation
 
-```javascript
+```typescript
 npm i @appolo/redis
 ```
 
@@ -22,13 +22,13 @@ npm i @appolo/redis
 ### Scrips Options
 | key | Description | Type | Default
 | --- | --- | --- | --- |
-| `name` | `name of the script | `string`|  ``|
+| `name` | name of the script | `string`|  ``|
 | `path` | path of the script | `string` | `` |
 | `lua` | path or the lua string | `string` | `` |
 | `args` | number of script arguments | `number` | 0 |
 in config/modules/all.ts
 
-```javascript
+```typescript
 import {RedisModule} from '@appolo/redis';
 
 export = async function (app: App) {
@@ -48,7 +48,7 @@ export = async function (app: App) {
 ```
 
 ## Usage
-```javascript
+```typescript
 import {define, singleton} from 'appolo'
 import {RedisProvider} from "@appolo/redis";
 
@@ -70,94 +70,94 @@ export class SomeManager {
 ```
 
 ## RedisProvider
-### `get`
+### get
 #### `get<T>(key: string): Promise<T>`
 get item from redis by key
 
-### `set`
+### set
 #### `set<T>(key: string, value: T): Promise<T>`
 set value by key the value converted to string with `JSON.stringify` before set
 
-### `getAllHash`
+### getAllHash
 #### `getAllHash<T>(key: string): Promise<{ [index: string]: T }>`
 get all items in hash map in key value object
 
-### `getHashKeys`
+### getHashKeys
 #### `getHashKeys<T>(key: string): Promise<string[]>`
 get all hash keys as array
 
-### `getHashValues`
+### getHashValues
 #### `getHashValues<T>(key: string): Promise<T[]>`
 get all hash value as array
 
-### `getByExpire`
+### getByExpire
 #### `getByExpire<T>(key: string, expire: number): Promise<{ value: T, validExpire: boolean }>`
 get item by key with expire if current ttl is less then expire/2 then validExpire will be false
-```javascript
+```typescript
 await this.redisProvider.setWithExpire("test",{data:true},1000)
 
 let result = await this.redisProvider.getByExpire("test",1000)
 
 result.validExpire // true
 ```
-### `setHash`
+### setHash
 #### `setHash<T>(hashMap: string, key: string, value: T): Promise<T>`
 set value in hash map
 
-### `getHash`
+### getHash
 #### `getHash<T>(hashMap: string, key: string): Promise<T>`
 get value from hash map
-### `delHash`
+### delHash
 #### `delHash(hashMap: string, ...keys: string[]): Promise<void>`
 delete value from hash map
-### `del`
+### del
 #### `del(...keys: string[]): Promise<void>`
 delete item by key
 
-### `delPattern`
+### delPattern
 #### `delPattern(pattern: string): Promise<void>`
 delete item by pattern
-```javascript
+```typescript
 await this.redisProvider.delPattern("*test*")
 ```
-### `setWithExpire`
+### setWithExpire
 #### `setWithExpire<T>(key: string, value: T, seconds: number): Promise<T>`
 set item with expire in seconds
 
-### `expire`
+### expire
 #### `expire(key: string, seconds: number): Promise<void>`
 set key expire in seconds
 
-### `scan`
+### scan
 #### `scan(pattern: string): Promise<string[]>`
 return array for keys
 
-### `scanHash`
+### scanHash
 #### `scanHash<T>(key: string, pattern: string = '*'): Promise<{ [index: string]: T }>`
 return hash keys by pattern in key value object
-### `scanHashValues`
+### scanHashValues
 #### `scanHashValues<T>(key: string, pattern: string = '*'): Promise<T[]>`
 return hash values by pattern in array
 
-### `ttl`
+### ttl
 #### `ttl(key: string): Promise<number>`
 return key ttl
 
-### `increment`
+### increment
 #### `increment(key: string, count: number = 1): Promise<void>`
 increment value by count
 
-### `incrementExpire`
+### incrementExpire
 #### `incrementExpire(key: string, seconds: number, count: number = 1): Promise<void>`
 increment value by count and expire in seconds
 
-### `lock`
+### lock
 ##### `lock(key: string, seconds: number, updateLockTime: boolean = false): Promise<boolean>`
 return true if value is locked if not lock it for x seconds
-#### `unlock`
+#### unlock
 #### `unlock(key: string): Promise<void>`
 unlock key
 
-### `runScript`
+### runScript
 #### `runScript<T>(name: string, keys: string[], values: any[], parse: boolean = true): Promise<T>`
 run lua script by script name

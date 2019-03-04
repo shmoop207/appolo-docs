@@ -7,7 +7,7 @@ socket module for appolo built with [socket.io](https://socket.io/)
 
 ## Installation
 
-```javascript
+```typescript
 npm i @appolo/scoket
 ```
 
@@ -21,7 +21,7 @@ npm i @appolo/scoket
 
 in config/modules/all.ts
 
-```javascript
+```typescript
 import {ScoketModule} from '@appolo/socket';
 
 export = async function (app: App) {
@@ -39,7 +39,7 @@ you can define custom namespace using `@socket("someNamespace")` default to `/`.
 you subscribe to socket events using `@action('someEvent')` the return object from the action will be passed to socket callback id exists
 promises also supported.
 
-```javascript
+```typescript
 import {action, socket, SocketController} from "@appolo/scoket";
 
 @socket()
@@ -54,7 +54,7 @@ export class MySocketController extends SocketController {
 }
 ```
 socket client
-```javascript
+```typescript
 import * as io from 'socket.io-client';
 
 let socket = io("http://localhost:8080")
@@ -70,7 +70,7 @@ socket.emit("someAction", "working" ({arg})=>{
 - `onConnected` - called when socket connected
 
 
-```javascript
+```typescript
 import {action, socket, SocketController} from "@appolo/scoket";
 
 @socket()
@@ -100,7 +100,7 @@ emit socket event
 ## Middleware
 Middleware can be used before socket connect
 
-```javascript
+```typescript
 import {IMiddleware} from "@appolo/scoket";
 
 @define()
@@ -117,7 +117,7 @@ export class TokenMiddleware implements IMiddleware {
 }
 ```
 
-```javascript
+```typescript
 @socket()
 @middleware(TokenMiddleware)
 export class MySocketController extends SocketController {
@@ -141,7 +141,7 @@ holds all the socket controllers.
 can send messages to all sockets and namespaces
 
 
-```javascript
+```typescript
 import {ScoketProvider} from "@appolo/scoket";
 
 @define()

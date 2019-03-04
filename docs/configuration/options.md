@@ -17,7 +17,7 @@ appolo launch configuration options, all options are optional
 | `maxRouteCache` | the max size of route lookup lru cache | `number` | `10000` |
 
 ## Usage
-```javascript
+```typescript
 import {createApp}  from 'appolo';
 (async ()=>{
     let app = await createApp({

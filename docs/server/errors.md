@@ -5,7 +5,7 @@ sidebar_label: Errors
 ---
 
 by default the response will be wrapped with try catch and `InternalServerError` will be send to response.
-```javascript
+```typescript
 {
     "status": 500,
     "message": "Bad Request",
@@ -13,7 +13,7 @@ by default the response will be wrapped with try catch and `InternalServerError`
 }
 ```
 or you can throw custom error
-```javascript
+```typescript
 import {controller,inject,validation,Controller,IRequest,IResponse,validator} from 'appolo';
 
 @controller()
@@ -32,7 +32,7 @@ export class LoginController extends Controller{
 }
 ```
 
-```javascript
+```typescript
 {
     "status": 401,
     "message": "Not Foundr",
@@ -46,7 +46,7 @@ export class LoginController extends Controller{
 you can define custom error middleware to handle route error.
 any express error middleware are also supported
 
-```javascript
+```typescript
 import {controller,inject,Controller,IRequest,IResponse,error} from 'appolo';
 
 @controller()
@@ -59,7 +59,7 @@ export class SomeController extends Controller{
 }
 ```
 
-```javascript
+```typescript
 import {inject,Controller,IRequest,IResponse,error,Middleware} from 'appolo';
 
 @define()
@@ -75,7 +75,7 @@ export class SomeErrorHandler extends Middleware{
 global middleware will be run on all routes
 
 in config/middleware/all.ts
-```javascript
+```typescript
 export = function (app: App) {
 
     app.error(function(err,res,req,next){
@@ -91,7 +91,7 @@ when route is not found HttpError is thrown with status 404
 you can catch the error by `get('*')` route or by error middleware
 
 in config/middleware/all.ts
-```javascript
+```typescript
 export = function (app: App) {
 
     app.error(function(err,res,req,next){

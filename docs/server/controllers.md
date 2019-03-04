@@ -10,7 +10,7 @@ Each controller action will be called with [request](http://expressjs.com/en/4x/
 
 controller action can return promise or an object that will be passed to `res.send(someData)` with status code 200
 
-```javascript
+```typescript
 import {controller,inject,Controller,IRequest,IResponse} from 'appolo';
 
 @controller()
@@ -37,7 +37,7 @@ export class LoginController extends Controller{
 ## Static Controllers
 By default, `appolo` creates a new controller instance for every request.
 If you do not need a new controller instance for every request, you can inherit from `StaticController` which is singleton.
-```javascript
+```typescript
 import {controller,singleton,inject,lazy,StaticController,IRequest,IResponse} from 'appolo';
 @controller()
 @singleton()
@@ -56,7 +56,7 @@ export class LoginController extends StaticController{
 ## Custom Response Decorators
 you can define your own custom response decorators
 
-```javascript
+```typescript
 import {controller,IRequest,IResponse,customRouteDecorator} from 'appolo';
 
 let myDecorator = customRouteDecorator((req:IRequest,res:IResponse,route)=>{
@@ -77,7 +77,7 @@ export class LoginController extends StaticController{
 
 ### StatusCode
 specify a custom statusCode default `200`
-```javascript
+```typescript
 import {controller,IRequest,IResponse,statusCode} from 'appolo';
 @controller()
 export class LoginController extends StaticController{
@@ -99,7 +99,7 @@ export class LoginController extends StaticController{
 
 ### Headers
 specify a custom response header
-```javascript
+```typescript
 import {controller,singleton,inject,IRequest,IResponse,header} from 'appolo';
 @controller()
 export class LoginController extends StaticController{
@@ -121,7 +121,7 @@ export class LoginController extends StaticController{
 
 ### Gzip
 it is possible to compress the response with gzip by calling `res.gzip`
-```javascript
+```typescript
 import {controller,singleton,inject,IRequest,IResponse} from 'appolo';
 @controller()
 export class LoginController extends StaticController{
@@ -149,7 +149,7 @@ export class LoginController extends StaticController{
 ## Custom Params Decorators
 you can define you own custom action parameters
 
-```javascript
+```typescript
 import {controller,IRequest,IResponse,customRouteParam} from 'appolo';
 
 let user = customRouteParam((req:IRequest,res:IResponse,route)=>{
@@ -175,7 +175,7 @@ built in custom params decorators
 - `@res()` - return `res`
 
 
-```javascript
+```typescript
 import {controller,IRequest,IResponse,headers,body} from 'appolo';
 
 @controller()

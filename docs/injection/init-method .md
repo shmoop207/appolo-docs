@@ -5,7 +5,7 @@ sidebar_label: Init Method
 ---
 
 The `init` method will be called after all instances were created and all the properties injected.
-```javascript
+```typescript
 @define()
 @singleton()
 class FooManager{
@@ -29,7 +29,7 @@ fooController.name // foo
  If the init method return promise the injector will **not** wait for the result.
  if you need ordered class init you can use the [`Bootstrap`](application/bootstrap.md) class
 
-```javascript
+```typescript
 import {define,singleton,inject,bootstrap,IBootstrap} from 'appolo';
 
 @define()

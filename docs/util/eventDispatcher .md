@@ -8,7 +8,7 @@ Appolo has a built-in event dispatcher to enable classes to listen to and fire e
 Event Dispatcher has the following methods
 
 ## Usage
-``` javascript
+```typescript
 import {define,singleton,initMethod,inject,EventDispatcher} from 'appolo';
 
 @define()
@@ -36,29 +36,36 @@ export class FooController {
 
 ## API
 
-### `on(event,callback,[scope])`
+### on
+#### `on(event,callback,[scope])`
 add an event listener
 - event - event name.
 - callback - callback function that will triggered on event name.
 - scope - optional, the scope of the callback function default: this.
-### `once(event,[callback],[scope])`
+### once
+#### `once(event,[callback],[scope])`
 add an event listener will be called only once if no callback passed a promise will be returned
 - event - event name.
 - callback - callback function that will triggered on event name.
 - scope - optional, the scope of the callback function default: this.
-### `un(event,callback,[scope])`
+### un
+#### `un(event,callback,[scope])`
 remove an event listener. All the arguments must be === to the onces used in the on method, or else it won`t be removed.
 - event - event name.
 - callback - callback function.
 - scope - optional, the scope of the callback function.
-### `fireEvent(event,[arguments])`
+### fireEvent
+#### `fireEvent(event,[arguments])`
 fireEvent - triggers the callback functions of a given event name
 - eventName - name of the event
 - arguments - all other arguments will be passed to the callback function
-### `removeAllListeners()`
+### removeAllListeners
+#### `removeAllListeners()`
 removes all event listeners
-### `removeListenersByScope(scope)`
+### removeListenersByScope
+#### `removeListenersByScope(scope)`
 removes all event listeners by given scope
-### `hasListener(event,callback,[scope]):boolean`
+### hasListener
+#### `hasListener(event,callback,[scope]):boolean`
 return true if listener exists
 

@@ -9,7 +9,7 @@ Request context module for appolo build with [appolo-context](https://github.com
 
 ## Installation
 
-```javascript
+```typescript
 npm i @appolo/context
 ```
 
@@ -20,7 +20,7 @@ npm i @appolo/context
 
 in config/modules/all.ts
 
-```javascript
+```typescript
 import {ContextModule} from '@appolo/context';
 
 export = async function (app: App) {
@@ -30,7 +30,7 @@ export = async function (app: App) {
 
 ## Usage
 first define your context using the `@context` decorator
-```javascript
+```typescript
 import {context} from '@appolo/context';
 
 @context()
@@ -56,7 +56,7 @@ export class MyContext {
 
 ```
 For the example we will define a middleware to set the context data
-```javascript
+```typescript
 @define()
 @singleton()
 export class UserMiddleware extends Middleware {
@@ -72,7 +72,7 @@ export class UserMiddleware extends Middleware {
 Now we can access the context from any class using `@inject context`
 > note that the context is uniq for every request and can not share data between requests
 
-```javascript
+```typescript
 @define()
 @singleton()
 export class SomeManager {
@@ -87,7 +87,7 @@ export class SomeManager {
 ```
 
 In the controller we will put the middleware and access the manager to get the context name
-```javascript
+```typescript
 @controller()
 export class ContextController extends Controller {
 
@@ -108,7 +108,7 @@ export class ContextController extends Controller {
 
 You can also access the current context from `getContext` function
 
-```javascript
+```typescript
 import {getContext} from '@appolo/context';
 
 @define()

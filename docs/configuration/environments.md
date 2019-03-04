@@ -10,21 +10,21 @@ It is recommended to have 4 types of environments: `development`, `testing`, `st
 After `app.launch` you can always access the current environment vars via `app.env`.
 
 all.ts
-```javascript
+```typescript
 export = {
   name:'all',
   someVar:'someVar'
 }
 ```
 development.ts
-```javascript
+```typescript
 export = {
   name:'develpment',
   db:'mongo://development-url'
 }
 ```
 testing.ts
-```javascript
+```typescript
 export = {
   name:'testing',
   db:'mongo://testing-url'
@@ -32,7 +32,7 @@ export = {
 
 ```
 If we launch our app.js with `NODE_ENV = testing`
-```javascript
+```typescript
 import {createApp}  from 'appolo';
 ...
 let app = await createApp().launch();
@@ -42,7 +42,7 @@ console.log(env.name,env.someVar,env.db) // 'testing someVar monog://testing-url
 
 ## Env Injection
 the env object can be injected to any class.
-```javascript
+```typescript
 import {define,initMethod,inject} from 'appolo';
 
 @define()

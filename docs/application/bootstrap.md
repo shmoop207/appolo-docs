@@ -8,7 +8,7 @@ Once it launched, appolo will try to find an appolo bootstrap class and call it'
 Only when the bootstrap is finished, the server will start. <br/>
 bootstrap must implement `IBootstrap`.
 
-```javascript
+```typescript
 import {define,singleton,initMethod,inject,bootstrap,IBootstrap} from 'appolo';
 @define()
 @bootstrap()

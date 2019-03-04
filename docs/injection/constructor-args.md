@@ -5,7 +5,7 @@ sidebar_label: Constructor Args
 ---
 
 you can inject objects to constructor arguments you can inject object instance by id or by value.
-```javascript
+```typescript
 @define()
 @singleton()
 export class FooManager{
@@ -32,7 +32,7 @@ console.log(buzzController.name()) // foobuzz
 
 it is not possible to use injected object via `@inject` in the constructor because the it is not yet injected.
 
-```javascript
+```typescript
 @define()
 @singleton()
 export class FooManager{
@@ -57,7 +57,7 @@ let buzzController = injector.getObject<BuzzController>(BuzzController);
 
 > use @initMethod to solve this
 
-```javascript
+```typescript
 @define()
 @singleton()
 export class FooManager{

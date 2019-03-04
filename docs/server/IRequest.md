@@ -5,46 +5,46 @@ sidebar_label: IRequest
 ---
 
 the request object inherits from [http.ClientRequest](https://nodejs.org/api/http.html#http_class_http_clientrequest)
-
-## `req.query`
+## Usage
+### req.query
 query params object
 
-## `req.body`
+### req.body
 body parser params object
 
-## `req.params`
+### req.params
 route params object
 
-## `req.hostname`
+### req.hostname
 host name of the request
 
-## `req.path`
+### req.path
 path name of the request
 
-## `req.secure`
+### req.secure
 boolean true is the request is https
 
-## `req.protocol`
+### req.protocol
 protocol of the request http or https
 
-## `req.ip`
+### req.ip
 return request ip
 
-## `req.model`
+### req.model
 if validation defined on the route will return the validation model
 
-## `req.app`
+### req.app
 instance of the appolo app
 
-## `req.get(name:string)`
-## `req.header(name:string)`
+### req.get(name:string)
+### req.header(name:string)
 Returns the specified HTTP request header
-```javascript
+```typescript
 req.get('content-type'); // => "text/plain"
 ```
-## `req.is(type:string)`
+### req.is(type:string)
 Returns the matching content type if the incoming request’s “Content-Type” HTTP header field matches the MIME type specified by the type parameter. If the request has no body, returns null. Returns false otherwise.
-```javascript
+```typescript
 req.is('html');       // => 'html'
 req.is('text/html');  // => 'text/html'
 ```

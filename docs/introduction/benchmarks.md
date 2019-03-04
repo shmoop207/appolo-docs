@@ -9,7 +9,7 @@ sidebar_label: Benchmarks
 - Node v10.5.0
 
 
-```javascript
+```typescript
 node benchmarks/benchmarks
 ```
 

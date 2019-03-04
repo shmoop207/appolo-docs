@@ -9,7 +9,7 @@ Cache methods results using [`appolo-cache​`](https://github.com/shmoop207/app
 
 ## Installation
 
-```javascript
+```typescript
 npm i @appolo/cache
 ```
 
@@ -26,7 +26,7 @@ npm i @appolo/cache
 all option are optional and will be added as defaults to cache options
 in config/modules/all.ts
 
-```javascript
+```typescript
 import {CacheModule} from '@appolo/cache';
 
 export = async function (app: App) {
@@ -59,7 +59,7 @@ export = async function (app: App) {
 
 
 ## Usage
-```javascript
+```typescript
 import { define } from 'appolo';
 import { cache } from '@appolo/cache';
 
@@ -98,22 +98,24 @@ export class SomeClass {
 ```
 
 ## CacheProvider
-### `createCache`
+### createCache
 #### `createCache(options: ICacheOptions, valueFn: Function, scope?: any)`
 create new cache wrapper
 - options - cache options
 - valueFn - value function will be called to get the value
 - scope - scope of the value function
 
-### `getCacheById`
+### getCacheById
 #### `getCacheById(id:string):Cache`
 return cache wrapper by id
 
 ## Cache
 cache wrapper instance
 
-### `get`
+### get
 #### `get<T>(...args: any[]): Promise<T> | T`
 get value from cache if not found the value fn will be called
-### `cache`
+
+### cache
+#### `cache:Cache`
 getter return [`appolo-cache​`](https://github.com/shmoop207/appolo-cache) instance

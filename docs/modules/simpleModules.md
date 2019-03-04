@@ -16,7 +16,7 @@ By default, each module can inject:
 - app - the app instance
 
 In config/modules/all.ts
-```javascript
+```typescript
 import {App} from 'appolo';
 export = async function(app:App){
     await app.module(async function(env:IEnv,inject:Injector,app:App){
@@ -27,7 +27,7 @@ export = async function(app:App){
 }
 ```
 Now we can inject myModuleObject to any class
-```javascript
+```typescript
 import {define,singleton,initMethod,inject} from 'appolo';
 @define()
 export  class AuthMiddleware{
@@ -39,7 +39,7 @@ export  class AuthMiddleware{
 ```
 
 module can loaded in parallel
-```javascript
+```typescript
 import {App} from 'appolo';
 export = async function(app:App){
     await app.module(SomeModule,SomeModule2);
@@ -48,7 +48,7 @@ export = async function(app:App){
 
 A logger module example with [winston](https://github.com/flatiron/winston)<br>
 In config/modules/all.ts
-```javascript
+```typescript
 import winston = require('winston');
 import {App} from 'appolo';
 export = async function(app:App){
@@ -64,7 +64,7 @@ export = async function(app:App){
     });
 ```
 Now we you inject logger anywhere we need it
-```javascript
+```typescript
 import {define,inject} from 'appolo';
 @define()
 export class DataManager{

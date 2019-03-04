@@ -5,7 +5,7 @@ sidebar_label: Lazy
 ---
 
 lazy class will be created only when injected for the first time
-```javascript
+```typescript
 @define()
 @singleton()
 @lazy()
@@ -25,7 +25,7 @@ console.log(buzzController.name) // bar
 
 ## Lazy Inject
 lazy inject will inject property method that will create the inject object once called
-```javascript
+```typescript
 @define()
 @singleton()
 @lazy()

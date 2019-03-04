@@ -6,7 +6,7 @@ sidebar_label: Alias
 
 you can add alias names to classes and get all the classes by single alias. all the alias must be `singleton`
 
-```javascript
+```typescript
 interface IHandler{
     name:string
 }
@@ -40,7 +40,7 @@ buzzController.name // foobar
 ## Alias Factory
 you can add alias factory names to classes and get all the classes new instance by factory method.
 
-```javascript
+```typescript
 interface IHandler{
     name:string
 }
