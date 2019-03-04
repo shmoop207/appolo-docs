@@ -100,7 +100,7 @@ My new content here..
 
 1. Refer to that doc's ID in an existing sidebar in `website/sidebar.json`:
 
-```javascript
+```typescript
 // Add newly-created-doc to the Getting Started category of docs
 {
   "docs": {
@@ -121,7 +121,7 @@ For more information about adding new docs, click [here](https://docusaurus.io/d
 1. Make sure there is a header link to your blog in `website/siteConfig.js`:
 
 `website/siteConfig.js`
-```javascript
+```typescript
 headerLinks: [
     ...
     { blog: true, label: 'Blog' },
@@ -151,7 +151,7 @@ For more information about blog posts, click [here](https://docusaurus.io/docs/e
 1. Add links to docs, custom pages or external links by editing the headerLinks field of `website/siteConfig.js`:
 
 `website/siteConfig.js`
-```javascript
+```typescript
 {
   headerLinks: [
     ...
@@ -175,7 +175,7 @@ For more information about the navigation bar, click [here](https://docusaurus.i
 1. If you want your page to show up in your navigation header, you will need to update `website/siteConfig.js` to add to the `headerLinks` element:
 
 `website/siteConfig.js`
-```javascript
+```typescript
 {
   headerLinks: [
     ...
