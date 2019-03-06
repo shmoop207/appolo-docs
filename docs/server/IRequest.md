@@ -27,6 +27,9 @@ boolean true is the request is https
 ### req.protocol
 protocol of the request http or https
 
+### req.fullUrl
+return full url with protocol hostname and path
+
 ### req.ip
 return request ip
 

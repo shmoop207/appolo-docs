@@ -3,7 +3,7 @@ id: queue
 title: Queue
 sidebar_label: Queue
 ---
-pubsub module for `appolo` built with [`appolo-queue`](https://github.com/shmoop207/appolo-queue)
+queue module for `appolo` built with [`appolo-queue`](https://github.com/shmoop207/appolo-queue)
 
 ## Installation
 
