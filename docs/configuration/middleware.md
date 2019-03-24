@@ -1,13 +1,13 @@
 ---
-id: middleware
-title: Middleware
-sidebar_label: Middleware
+id: middlewares
+title: Middlewares
+sidebar_label: Middlewares
 ---
 
-You can configure express middleware or add custom middleware by adding configuration files to the express folder.
-The express configuration file is called after the environment files were loaded.
+You can configure express middleware or add custom middleware by adding configuration files to the middlewares folder.
+The middlewares configuration file is called after the environment files were loaded.
 
-in file config/middleware/all.ts
+in file config/middlewares/all.ts
 ```typescript
 import favicon = require('static-favicon');
 import bodyParser = require("body-parser");
