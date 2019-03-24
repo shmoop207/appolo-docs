@@ -74,11 +74,11 @@ export class SomeErrorHandler extends Middleware{
 ## Global Error handler
 global middleware will be run on all routes
 
-in config/middleware/all.ts
+in config/middlewares/all.ts
 ```typescript
 export = function (app: App) {
 
-    app.error(function(err,res,req,next){
+    app.error(function(err:any,req:IRequest,res:IResponse,next:NextFn){
         console.log(err)
     });
 
@@ -90,11 +90,11 @@ export = function (app: App) {
 when route is not found HttpError is thrown with status 404
 you can catch the error by `get('*')` route or by error middleware
 
-in config/middleware/all.ts
+in config/middlewares/all.ts
 ```typescript
 export = function (app: App) {
 
-    app.error(function(err,res,req,next){
+    app.error(function(err:any,req:IRequest,res:IResponse,next:NextFn){
         if(err instanceof HttpError && err.statusCode == 404){
             res.render("404.html")
         }
