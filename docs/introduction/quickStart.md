@@ -14,7 +14,11 @@ npm install appolo --save
 
 ```typescript
 {
-    "experimentalDecorators": true
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "target": "es2017",
+    "module": "commonjs"
+  }
 }
 ```
 ## Launch
