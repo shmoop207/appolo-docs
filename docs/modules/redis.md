@@ -56,7 +56,7 @@ import {RedisProvider} from "@appolo/redis";
 @singleton()
 export class SomeManager {
 
-    inject() redisProvider:RedisProvider;
+    @inject() redisProvider:RedisProvider;
 
     async run(data:any): Promise<any> {
         await this.redisProvider.set("test",data)

@@ -136,12 +136,13 @@ import {request} from "@appolo/bus";
 export class SomePublisher {
 
     @request("test")
-    async getData(data: any): Promise<any> {
+    private async _request(data: any): Promise<any> {
         return data
     }
 
-    public async handleData(){
-        let data = await this.getData({userId:1})
+    public async getData(){
+        let data = await this._request({userId:1})
+        return data;
     }
 
 
@@ -153,9 +154,9 @@ Or with BusProvider
 @singleton()
 export class SomePublisher {
 
-    inject() busProvider:busProvider
+    @inject() busProvider:busProvider
 
-    publish(data:any): Promise<any> {
+    public getData(data:any): Promise<any> {
         let data = await  this.busProvider.request("test",data)
 
         return data;
@@ -174,7 +175,7 @@ import {handler} from "@appolo/bus";
 @singleton()
 export class SomeHandler {
 
-    inject() busProvider:busProvider
+    @inject() busProvider:busProvider
 
 
     @reply("test")
