@@ -135,13 +135,15 @@ export class SearchModel {
 then in the controller
 ```typescript
 import {controller,inject,Controller,IRequest,IResponse,validator,get} from 'appolo';
+import {validate} from '@appolo/validation';
+
 @controller()
 export class TestController extends Controller{
 
     @inject() dataManager:DataManager
 
     @get("/search/")
-    @validations(SearchModel)
+    @validate(SearchModel)
     public async search (req:IRequest, res:IResponse,model:SearchModel) {
        let {search,page,pageSize} = model;
        return await this.dataManager.getSearchResults(search,page,pageSize)
