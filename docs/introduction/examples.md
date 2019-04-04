@@ -9,6 +9,10 @@ sidebar_label: Examples
 
 [source](https://github.com/shmoop207/appolo-chat-example)
 
-[![chat](/img/quotes.png)](http://appolo-http-quotes-example.herokuapp.com/)
+[![quotes](/img/quotes.png)](http://appolo-quotes-example.herokuapp.com/)
 
-[source](https://github.com/shmoop207/quotes-example)
+[source](https://github.com/shmoop207/appolo-quotes-example)
+
+[![todo](/img/todo.png)](http://appolo-todo-example.herokuapp.com/)
+
+[source](https://github.com/shmoop207/appolo-todo-example)
