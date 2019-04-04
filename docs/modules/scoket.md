@@ -40,7 +40,7 @@ you subscribe to socket events using `@action('someEvent')` the return object fr
 promises also supported.
 
 ```typescript
-import {action, socket, SocketController} from "@appolo/scoket";
+import {action, socket, SocketController} from "@appolo/socket";
 
 @socket()
 export class MySocketController extends SocketController {
@@ -71,7 +71,7 @@ socket.emit("someAction", "working" ({arg})=>{
 
 
 ```typescript
-import {action, socket, SocketController} from "@appolo/scoket";
+import {action, socket, SocketController} from "@appolo/socket";
 
 @socket()
 export class MySocketController extends SocketController {
@@ -101,7 +101,7 @@ emit socket event
 Middleware can be used before socket connect
 
 ```typescript
-import {IMiddleware} from "@appolo/scoket";
+import {IMiddleware} from "@appolo/socket";
 
 @define()
 export class TokenMiddleware implements IMiddleware {
@@ -142,7 +142,7 @@ can send messages to all sockets and namespaces
 
 
 ```typescript
-import {ScoketProvider} from "@appolo/scoket";
+import {ScoketProvider} from "@appolo/socket";
 
 @define()
 export class SomeManager  {
