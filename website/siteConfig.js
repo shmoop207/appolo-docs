@@ -89,8 +89,8 @@ const siteConfig = {
     cleanUrl: true,
 
     // Open Graph and Twitter card images.
-    ogImage: 'img/docusaurus.png',
-    twitterImage: 'img/docusaurus.png',
+    ogImage: 'img/appolo.png',
+    twitterImage: 'img/appolo.png',
 
     scrollToTop: true,
     scrollToTopOptions: {
