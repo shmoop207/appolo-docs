@@ -3,7 +3,7 @@ id: typeorm
 title: TypeORM
 sidebar_label: TypeORM
 ---
-TypeORM module for [`appolo`](https://github.com/shmoop207/appolo) built with [TypeOrm](https://github.com/typeorm/typeorm)
+TypeORM module for [`appolo`](https://github.com/shmoop207/appolo) built with [TypeORM](https://github.com/typeorm/typeorm)
 
 ## Installation
 
