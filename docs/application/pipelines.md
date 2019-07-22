@@ -139,3 +139,36 @@ return  argument value at index
 
 ### values
 return  array of argument values by index and type
+
+## Logger example
+```typescript
+import {define,pipeline,IPipeline} from 'appolo';
+
+@define()
+export class SomeClass {
+    
+    @pipeline(LoggerPipeline)
+    async test(value:number){
+        return value
+    }
+}
+
+@define()
+export class LoggerPipeline implements IPipeline{
+
+    @inject() logger:Ilogger;
+
+   async run(context:PipelineContext, next){
+        let time = Date.now()
+        let result = await next();
+        
+        let params = {
+            args:context.arguments,
+            result,
+            time:Date.now()-time
+        };
+        
+        this.logger.info(`method called ${contrxt.action}`,params);
+   }
+}
+```
