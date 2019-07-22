@@ -85,7 +85,7 @@ export class SomeManager{
 
 ### Validate with options
 ```typescript
-import {define,inject,Controller,IRequest,IResponse,get} from 'appolo';
+import {define} from 'appolo';
 import {validate} from '@appolo/validation';
 
 @define()
@@ -97,19 +97,52 @@ export class SomeManager{
 ```
 
 ### Validation Error
-If validation fails `BadRequestError` will be thrown
-- message will be formatted using `validationErrorFormat` options
-- data  - array of `ValidationError`
+   If validation fails `BadRequestError` will be thrown
+   - message will be formatted using `validationErrorFormat` options
+   - data  - array of `ValidationError`
+   
+   ```typescript
+   [{
+       target: Object,
+       property: "title",
+       value: "Hello",
+       constraints: {
+           length: "$property must be longer than or equal to 10 characters"
+       }
+   }]
+   ```
+
+### Custom Validator
+you can define custom validator using appolo injector
 
 ```typescript
-[{
-    target: Object,
-    property: "title",
-    value: "Hello",
-    constraints: {
-        length: "$property must be longer than or equal to 10 characters"
+import {registerDecorator,ValidationArguments,ValidationOptions,ValidatorConstraint,ValidatorConstraintInterface} from "class-validator";
+import {define,inject} from 'appolo';
+
+@define()
+@ValidatorConstraint({async: true})
+export class IsValidUserNameConstraint implements ValidatorConstraintInterface {
+    
+    @inject() userRepository:UserRepository;
+    
+    async validate(value: any, args: ValidationArguments) {
+        let user = await this.userRepository.findOneByName(value)
+            
+        return !!user
     }
-}]
+}
+
+export function IsValidUserName(validationOptions?: ValidationOptions) {
+    return function (object: Object, propertyName: string) {
+        registerDecorator({
+            target: object.constructor,
+            propertyName: propertyName,
+            options: validationOptions,
+            constraints: [],
+            validator: IsValidUserNameConstraint
+        });
+    };
+}
 ```
 
 ## Transform
