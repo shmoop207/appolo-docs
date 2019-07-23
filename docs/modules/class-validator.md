@@ -4,7 +4,7 @@ title: ClassValidator
 sidebar_label: ClassValidator
 ---
 
-validate any method or argument using [class-validator](https://github.com/typestack/class-validator ) and [class-transformer](https://github.com/typestack/class-transformer)
+validate any method or argument using [class-validator](https://github.com/typestack/class-validator) and [class-transformer](https://github.com/typestack/class-transformer)
 
 
 ## Installation
