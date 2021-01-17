@@ -5,7 +5,7 @@ module.exports = {
     "https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;700&display=swap",
     "https://fonts.googleapis.com/icon?family=Material+Icons",
   ],
-  url: 'https://appolojs.com',
+  url: 'https://appolo.dev',
   baseUrl: '/',
   onBrokenLinks: 'warn',
   favicon: 'img/appolo_fav.ico',
@@ -17,7 +17,7 @@ module.exports = {
       indexName: 'shmoop207_appolo',
       searchParameters: {}, // Optional (if provided by Algolia)
     },
-    image: "img/poster.png",
+    image: "img/appolo.png",
     // announcementBar: {
     //   id: 'supportus',
     //   content:
@@ -110,7 +110,7 @@ module.exports = {
       logo: {
         alt: 'appolo Logo',
         src: 'img/appolo_fav.ico',
-        href: 'https://appolojs.com/',
+        href: 'https://appolo.dev',
       },
       copyright: `Copyright © ${new Date().getFullYear()} Appolo`,
     }
