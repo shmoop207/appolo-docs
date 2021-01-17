@@ -3,7 +3,7 @@ id: typeorm
 title: TypeORM
 sidebar_label: TypeORM
 ---
-TypeORM module for [`appolo`](https://github.com/shmoop207/appolo) built with [TypeORM](https://github.com/typeorm/typeorm)
+TypeORM module  built with [TypeORM](https://github.com/typeorm/typeorm)
 
 ## Installation
 
@@ -24,7 +24,7 @@ in config/modules/all.ts
 import {TypeOrmModule} from '@appolo/typeorm';
 
 export = async function (app: App) {
-    await app.module(new TypeOrmModule({
+    app.module.use( TypeOrmModule.for({
         config: {
             type: "postgres",
             url: process.env.POSTGRES_URL,
@@ -36,7 +36,7 @@ export = async function (app: App) {
 
 ## Usage
 ```typescript
-import {define, singleton} from 'appolo'
+import {define, singleton} from '@appolo/inject'
 import {Entity,Column,model,Index,PrimaryGeneratedColumn,Repository} from "@appolo/typeorm";
 
 @model()
@@ -82,7 +82,7 @@ with modelRepository you can access to the typeorm repositories and db connectio
 getter return typeorm connection
 
 ### getModel
-#### getModel<T>(model: typeof Schema): Model<T>
+#### getModel<T\>(model: typeof Schema): Model<T\>
 return mongoose model by schema type
 ```typescript
 @define()

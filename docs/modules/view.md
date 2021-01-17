@@ -24,14 +24,14 @@ npm i nunjucks
 in config/modules/all.ts
 
 ```typescript
-import {App} from 'appolo';
+import {App} from '@appolo/core';
 import {ViewModule,ViewEngines} from '@appolo/view';
 
 export = async function (app:App) {
 
-    await app.module(new ViewModule({
+    app.module.use(ViewModule.for({
         viewEngine:ViewEngines.nunjucks
-    });
+    }));
 }
 ```
 
@@ -39,14 +39,14 @@ export = async function (app:App) {
 
 now you can use the res.render function in the controller
 ```typescript
-import {controller, inject, IResponse, get, StaticController} from 'appolo';
+import {controller, IResponse, get, StaticController} from '@appolo/route';
 
 @controller()
 export class ViewController extends StaticController {
 
     @get("/test/view")
     async someView(req, res: IResponse, route) {
-        await res.render("path to view", {test: req.query.test}
+        await res.render("path to view", {test: req.query.test})
     }
 }
 
@@ -54,21 +54,21 @@ export class ViewController extends StaticController {
 
 if the path is not defined the view will be searched in the same folder as the controller and file name as the action in the example below it will search for `view2.html`
 ```typescript
-import {controller, inject, IResponse, get, StaticController} from 'appolo';
+import {controller, IResponse, get, StaticController} from '@appolo/route';
 
 @controller()
 export class ViewController extends StaticController {
 
     @get("/test/view2")
     async view2(req, res: IResponse, route) {
-        await res.render( {test: req.query.test}
+        await res.render( {test: req.query.test})
     }
 }
 ```
 
 the view can be rendered with `view` decorator
 ```typescript
-import {controller, inject, IResponse, get, StaticController} from 'appolo';
+import {controller, IResponse, get, StaticController} from '@appolo/route';
 import {view} from '@appolo/view';
 
 
@@ -84,7 +84,7 @@ export class ViewController extends StaticController {
 ```
 promises also supported
 ```typescript
-import {controller, inject, IResponse, get, StaticController} from 'appolo';
+import {controller, IResponse, get, StaticController} from '@appolo/injetc';
 import {view} from '@appolo/view';
 
 @controller()

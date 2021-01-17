@@ -3,11 +3,11 @@ id: socket
 title: Socket
 sidebar_label: Socket
 ---
-socket module for appolo built with [socket.io](https://socket.io/)
+socket module built with [socket.io](https://socket.io/)
 
 ## Installation
 
-```typescript
+```npm
 npm i @appolo/scoket
 ```
 
@@ -25,14 +25,16 @@ in config/modules/all.ts
 import {ScoketModule} from '@appolo/socket';
 
 export = async function (app: App) {
-   await app.module(new ScoketModule({redis:"redis://redis-connection-string"}));
+    app.module.use(ScoketModule.for({
+        redis:"redis://redis-connection-string"
+    }));
 }
 ```
 
 
 ## SocketController
 will be created on socket new connection and holds the socket instance.
-must be inherit from `SocketController` and defined using `@socket`.
+must be inherited from `SocketController` and defined using `@socket`.
 
 you can define custom namespace using `@socket("someNamespace")` default to `/`.
 
@@ -46,7 +48,7 @@ import {action, socket, SocketController} from "@appolo/socket";
 export class MySocketController extends SocketController {
 
     @action("someAction")
-    public asyc test(name: string) {
+    public async test(name: string) {
         let someData  = await doSomeThingAsync();
 
         return {arg:name,someData}

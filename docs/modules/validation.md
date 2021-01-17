@@ -1,48 +1,45 @@
 ---
-id: validation
-title: Validation
-sidebar_label: Validation
+id: validator
+title: Validator
+sidebar_label: Validator
 ---
 
-You can add validations to your routes. The action controller will be called only if the route params are valid.<br/>
-Validations are done using [joi module](https://github.com/hapijs/joi  ).<br/>
-The validator takes request params from `req.param` , `req.query` and `req.body`. After validation, all request params will be available on `req.model`.
+You can add validations to any class or method using the `validate` decorator. The method will be called if the validation is valid.<br/>
+Validations are using [appolo-validator](https://github.com/shmoop207/appolo-validator  ).<br/>
 
 
 ## Installation
 ```typescript
-npm i @appolo/validation
+npm i @appolo/validator
 ```
 
 ## Options
 
-any options from joi validate [options](https://github.com/hapijs/joi/blob/v14.3.1/API.md#validatevalue-schema-options-callback)
 | key | Description | Type | Default
 | --- | --- | --- | --- |
-| `abortEarly` | when true, stops validation on the first error, otherwise returns all the errors found. | `boolean`|  `false`|
 | `convert` | when true, attempts to cast values to the required types (e.g. a string to a number) | `boolean` | `true` |
-| `allowUnknown` | when true, allows object to contain unknown keys which are ignored | `boolean` | `true` |
 | `stripUnknown` |  remove unknown elements from objects and arrays| `boolean` | `true` |
 
 in config/modules/all.ts
 
 ```typescript
 import {App} from 'appolo';
-import {ValidationModule} from '@appolo/validation';
+import {ValidationModule} from '@appolo/validator';
 
 export = async function (app:App) {
 
-    await app.module(new ValidationModule({
+    app.module.use(ValidationModule.for({
         allowUnknown:true
     }));
 }
 ```
 ## Usage
 ### Validate Object
-validate with object
+validate with an object will run on the first argument
 ```typescript
-import {controller,inject,Controller,IRequest,IResponse,get} from 'appolo';
-import {joi,validate} from '@appolo/validation';
+import {controller,Controller,IRequest,IResponse,get,query} from '@appolo/route';
+import {inject} from '@appolo/inject';
+import {string,validate,number} from '@appolo/validation';
 
 @controller()
 export class TestController extends Controller{
@@ -50,43 +47,31 @@ export class TestController extends Controller{
 
     @get("/search/")
     @validate({
-        search:joi.string().required(),
-        pageSize:joi.number().default(20),
-        page:joi.number().default(1)
+        search:string().required(),
+        pageSize:number().default(20),
+        page:number().default(1)
     })
-    public async search (req:IRequest, res:IResponse,model:any) {
-        let {search,page,pageSize} = model;
+    public async search (@query() query) {
+        let {search,page,pageSize} = query;
         return await this.dataManager.search(search,page,pageSize)
     }
 }
 ```
-### Validate Params
-validate with params
-```typescript
-import {controller,inject,Controller,IRequest,IResponse,get} from 'appolo';
-import {joi,validate} from '@appolo/validation';
 
-@controller()
-export class TestController extends Controller{
-    @inject() dataManager:DataManager
-
-    @post("/login/")
-    @validate("name",joi.string().required())
-    @validate("pass",joi.string().required())
-    public async login (req:IRequest, res:IResponse,model:any) {
-    
-        let {name,pass} = model;
-            return await this.dataManager.login(name,pass)
-    }
-}
-```
 
 
 ### Custom Options
-custom validate [options](https://github.com/hapijs/joi/blob/v14.3.1/API.md#validatevalue-schema-options-callback) can be applied to each `validate`
+custom validate with options
+
+| key | Description | Type | Default
+| --- | --- | --- | --- |
+| `convert` | when true, attempts to cast values to the required types (e.g. a string to a number) | `boolean` | `true` |
+| `stripUnknown` |  remove unknown elements from objects and arrays| `boolean` | `true` |
+| `groups` |  groups of the validation| `string[]` | `[]` |
+
 ```typescript
 import {controller,inject,Controller,IRequest,IResponse,get} from 'appolo';
-import {joi,validate} from '@appolo/validation';
+import {validate} from '@appolo/validation';
 
 @controller()
 export class TestController extends Controller{
@@ -94,18 +79,18 @@ export class TestController extends Controller{
 
     @get("/search/")
     @validate({
-        search:joi.string().required(),
-        pageSize:joi.number().default(20),
-        page:joi.number().default(1)
-    },{stripUnknown:false})
-    public async search (req:IRequest, res:IResponse,model:any) {
-        let {search,page,pageSize} = model;
+        search:string().required(),
+        pageSize:number().default(20),
+        page:number().default(1)
+    },{stripUnknown:false,groups:["search"]})
+    public async search (@query() query) {
+        let {search,page,pageSize} = query;
         return await this.dataManager.getSearchResults(search,page,pageSize)
     }
 }
 ```
 ### Validation Fail
-If the request params are not valid, appolo will return a `400 Bad Request` response with detailed validation errors.
+If the params are not valid, `BadRequestError` will return a `400 Bad Request` response with detailed validation errors.
 ```typescript
 {
     status: 400,
@@ -115,26 +100,27 @@ If the request params are not valid, appolo will return a `400 Bad Request` resp
 ```
 
 ### Validation Model
-`appolo` also supports validation model
+you can use the validations as method decorators
 ```typescript
-import {joi,validate,param} from '@appolo/validation';
+import {string,number} from '@appolo/validation';
 
 export class SearchModel {
     
-    @param(joi.string().required())
+    @string().required()
     search: string;
 
-    @param(joi.number().required())
+    @number().required()
     pageSize: number
 
-    @param(joi.number().default(1))
+    @number().default(1)
     page: number
 }
 ```
 
 then in the controller
 ```typescript
-import {controller,inject,Controller,IRequest,IResponse,validator,get} from 'appolo';
+import {controller,Controller,IRequest,IResponse,validator,get,query} from '@appolo/route';
+import {inject} from '@appolo/inject';
 import {validate} from '@appolo/validation';
 
 @controller()
@@ -143,73 +129,223 @@ export class TestController extends Controller{
     @inject() dataManager:DataManager
 
     @get("/search/")
-    @validate(SearchModel)
-    public async search (req:IRequest, res:IResponse,model:SearchModel) {
-       let {search,page,pageSize} = model;
+    public async search (@validate() @query() query:SearchModel) {
+       let {search,page,pageSize} = query;
        return await this.dataManager.getSearchResults(search,page,pageSize)
     }
 }
 ```
-#### Custom options
+### Custom options
 ```typescript
-import {joi,validate,param,schema} from '@appolo/validation';
+import {object,number,string} from '@appolo/validator';
 
-@schema({stripUnknown:false})
+@schema(object().options({stripUnknown:false}))
 export class SearchModel {
     
-    @param(joi.string().required())
+    @string().required()
     search: string;
 
-    @param(joi.number().required())
+    @number().required()
     pageSize: number
 
-    @param(joi.number().default(1))
+    @number().default(1)
     page: number
 }
 ```
 
 #### Inherit Model
 ```typescript
-import {joi,validate,param,schema} from '@appolo/validation';
+import {string} from '@appolo/validator';
 
 export class BaseSearchModel {
-     @param(joi.string().required())
+     @string().required()
       search: string;
 }
 
 export class SearchModel extends BaseSearchModel{
     
-    @param(joi.number().required())
+    @number().required()
     pageSize: number
 
-    @param(joi.number().default(1))
+    @number().default(1)
     page: number
 }
 ```
 
 #### Nested Model
+nested model can be an object or array
 ```typescript
-import {joi,validate,param,schema} from '@appolo/validation';
+import {string,number,param,schema} from '@appolo/validator';
 
 export class SearchModel {
-     @param(joi.string().required())
+     @string().required()
      search: string;
-     @param(joi.number().required())
+     
+@number().required()
      pageSize: number
      
-     @param(joi.number().default(1))
+     @number().default(1)
      page: number
 }
 
 export class PageModel{
     
-    @param(SearchModel)
+    @object().keys(SearchModel)
     search:SearchModel
     
-    @param([SearchModel])
+    @array().items(SearchModel)
     searches:SearchModel[]
     
-    @param([SearchModel],joi.required())
+    @array().items(SearchModel).required()
     searches2:SearchModel[]
 }
 ```
+
+### Custom message
+```typescript
+import {object,number,string} from '@appolo/validator';
+
+export class SearchModel {
+    
+    @string({message:"invalid string"}).max(5,{message:"invalid string ${arg0} len"}).required()
+    search: string;
+}
+```
+
+### Groups
+when groups defined on a schema or constrain it will only run when validation  called with matched group
+```typescript
+import {object,number,string} from '@appolo/validator';
+
+export class SearchModel {
+    
+    @string().max(5,{groups:["test"]}).required().groups(["test2"])
+    search: string;
+}
+
+
+@define()
+export class TestController{
+    
+    public async search (@validate({groups:["test"]}) query:SearchModel) {
+        ...
+    }
+}
+```
+
+### Custom Validator
+it is possible to define custom validators as standalone or with inject.
+
+custom validator must implement `IConstraint` then register the validator using `registerConstraint`
+ ```typescript
+@define()
+@singleton()
+export class RangeValidator implements IConstraint {
+
+    @inject() env:IEnv
+
+    public async validate(params: ValidationParams): Promise<IConstraintValidateResult> {
+       
+        let isValid = params.value >= params.args[0] && params.value < params.args[1];
+
+        return {isValid};
+    }
+
+    public get type(): string {
+        return "range"
+    }
+
+    public get defaultMessage(): string {
+        return "${property} has invalid range "
+    }
+}
+```
+
+register the validator to the base schema
+
+ ```typescript
+registerConstraint.extend({
+    base: NumberSchema,
+    name: "range",
+    constraint: RangeValidator,
+    inject: true // set true to use injector to create the validator instance
+});
+```
+add the validator types to base schema
+ ```typescript
+
+declare module "@appolo/validator" {
+    export interface NumberSchema {
+        range(min: number, max: number): this;
+    }
+}
+```
+now we can use the validator
+ ```typescript
+    @validate(number().range(1, 3))
+    public async someMethod(num: number): Promise<any> {
+        return num
+    }
+
+
+```
+
+string constrain will run but not max constrain
+<!--- 
+## Constrains
+### String
+validate if given value is string
+#### transforms
+##### decode(options?: IConverterOptions): this;
+UrlDecode given value
+##### truncate(limit: number, options?: IConverterOptions): this;
+truncate with given limit
+##### trim(options?: IConverterOptions): this;
+trim string 
+##### slugify(options?: IConverterOptions): this;
+remove invalid url chars
+##### sanitize(options?: IConverterOptions): this;
+remove non ascii chars
+##### replace(searchValue: string | RegExp, replaceValue: string, options?: IConverterOptions): this;
+replace string with given searchValue and replaceValue
+#### Constrains
+##### uuid(options?: IConstraintOptions): this;
+check is value is guid
+##### url(options?: IConstraintOptions): this;
+check is value is valid url
+##### uppercase(options?: IConstraintOptions): this;
+check is value is uppercase
+
+##### token(options?: IConstraintOptions): this;
+check is value is valid token
+
+##### slug(options?: IConstraintOptions): this;
+check is value is valid slug
+
+##### size(limit: number | Ref, options?: IConstraintOptions): this;
+check is value has valid length
+
+##### regex(regex: RegExp, options?: IConstraintOptions): this;
+check is value match regex
+
+##### numeric(options?: IConstraintOptions): this;
+##### mongoId(options?: IConstraintOptions): this;
+##### min(limit: number, options?: IConstraintOptions): this;
+##### md5(options?: IConstraintOptions): this;
+##### max(limit: number, options?: IConstraintOptions): this;
+##### lowercase(options?: IConstraintOptions): this;
+##### jwt(options?: IConstraintOptions): this;
+##### json(options?: IConstraintOptions): this;
+##### isoDate(options?: IConstraintOptions): this;
+##### ip(options?: IConstraintOptions): this;
+##### hexadecimal(options?: IConstraintOptions): this;
+##### hash(type: "md5" | "md4" | "sha1" | "sha256" | "sha384" | "sha512", options?: IConstraintOptions): this;
+##### enum(enumType: any, options?: IConstraintOptions): this;
+##### email(options?: IConstraintOptions): this;
+##### domain(options?: IConstraintOptions): this;
+##### contains(value: string, options?: IConstraintOptions): this;
+##### base64(options?: IConstraintOptions): this;
+##### ascii(options?: IConstraintOptions): this;
+##### alpha(options?: IConstraintOptions): this;
+##### alphanum(options?: IConstraintOptions): this;
+--->

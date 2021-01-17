@@ -3,7 +3,7 @@ id: bus
 title: Bus
 sidebar_label: Bus
 ---
-bus module for [`appolo`](https://github.com/shmoop207/appolo) built with [rabbot](https://github.com/arobson/rabbot)
+RabbitMQ bus module built with [appolo-rabbit](https://github.com/shmoop207/appolo-rabbit)
 
 ## Installation
 
@@ -16,15 +16,13 @@ npm i @appolo/bus
 | --- | --- | --- | --- |
 | `id` |  injection id | `string`|  `busProvider`|
 | `connection` | AMQP connection string | `string` | null |
-| `auto` | true to auto initialize busProvider and start listen to events | `boolean` | `true` |
-| `listener` | true to register queue event handlers | `boolean` | `true` |
-| `exchangeName` | name of the exchange | `string` |  |
-| `queueName` | name of the queue | `string` |  |
-| `appendEnv` | append `env` name to queueName and exchangeName  | `boolean` | `true` |
-| `exchange` | exchange options  | `object` | `{}` |
+| `autoListen` | true to auto initialize busProvider and start listen to events | `boolean` | `true` |
+| `handleEvents` | true to register queue event handlers | `boolean` | `true` |
+| `exchange` | name of the exchange or exchange options | `string` |`{}` |  |
 | `queue` | queue options  | `object` | `{}` |
 | `requestQueue` | request queue options  | `object` | `{}` |
-| `replayQueue` | request queue options or `false to disable` | `object` | `{}` |
+| `replayQueue` | request queue options  | `object` | `{}` |
+| `appendEnv` | append `env` name to queueName and exchangeName  | `boolean` | `true` |
 
 ### Exchange Options
 | key | Description | Type | Default
@@ -56,40 +54,34 @@ npm i @appolo/bus
 in config/modules/all.ts
 
 ```typescript
-import {PubSubModule} from '@appolo/pubsub';
+import {BusModule} from '@appolo/bus';
 
 export = async function (app: App) {
-   await app.module(new BusModule({redis:"amqp://connection-string"}));
+    app.module.use(BusModule.for({
+        connection:"amqp://connection-string",
+        exhcnage:"exhcnage",
+        queue:"someQueue"
+    }));
 }
 ```
 
 ## Usage
 
 ### Publisher
+
+we inject BusProvider in order to publish messages
 ```typescript
-import {define, singleton} from 'appolo'
-import {publisher} from "@appolo/bus";
+import {define, singleton,inject} from '@appolo/inject'
+import {BusProvider} from "@appolo/bus";
 
 @define()
 @singleton()
 export class SomePublisher {
 
-    @publisher("test")
-    async publish(data: any): Promise<any> {
-        return data
-    }
-}
-```
-Or with BusProvider
-```typescript
-@define()
-@singleton()
-export class SomePublisher {
-
-    inject() busProvider:BusProvider
+    @inject() busProvider:BusProvider
 
     publish(data:any): Promise<any> {
-        return this.busProvider.publish("test",data)
+        return this.busProvider.publish({routingKey:"test",data})
     }
 }
 
@@ -99,7 +91,7 @@ if you don not call msg ack or nack
 it will be called on handler return `msg.ack()` or `msg.nack()` on error
 
 ```typescript
-import {define, singleton} from 'appolo'
+import {define, singleton} from '@appolo/inject'
 import {handler} from "@appolo/bus";
 
 @define()
@@ -127,37 +119,23 @@ export class SomeHandler {
 ```
 
 ### Request
+we can await a response and set expire timout
+if timeout reached timeout error will be thrown
 ```typescript
-import {define, singleton} from 'appolo'
-import {request} from "@appolo/bus";
+import {define, singleton} from '@appolo/bus'
+import {BusProvider} from "@appolo/bus";
 
 @define()
 @singleton()
 export class SomePublisher {
 
-    @request("test")
-    private async _request(data: any): Promise<any> {
-        return data
-    }
+    @inject() busProvider:BusProvider
 
-    public async getData(){
-        let data = await this._request({userId:1})
-        return data;
-    }
-
-
-}
-```
-Or with BusProvider
-```typescript
-@define()
-@singleton()
-export class SomePublisher {
-
-    @inject() busProvider:busProvider
-
-    public getData(data:any): Promise<any> {
-        let data = await  this.busProvider.request("test",data)
+    public async getData(params:any): Promise<any> {
+        let data = await  this.busProvider.request({
+            routingKey:"test",
+            params,
+            expire:5000})
 
         return data;
     }
@@ -166,16 +144,15 @@ export class SomePublisher {
 ```
 
 ### Reply
-
+we define reply answer handler
 ```typescript
-import {define, singleton} from 'appolo'
+import {define, singleton} from '@appolo/inject'
 import {handler} from "@appolo/bus";
 
 @define()
 @singleton()
 export class SomeHandler {
 
-    @inject() busProvider:busProvider
 
 
     @reply("test")

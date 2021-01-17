@@ -3,7 +3,7 @@ id: options
 title: Options
 sidebar_label: Options
 ---
-appolo launch configuration options, all options are optional
+appolo create configuration options, all options are optional
 
 | key | Description | Type | Default
 | --- | --- | --- | --- |
@@ -14,11 +14,12 @@ appolo launch configuration options, all options are optional
 | `startServer` | if true the server will start immediately to listen to port else you will have to start in manually. | `boolean` | `true` |
 | `port` | the port that the app will listen to. | `number` | `process.env.PORT or this._options.port or appolo.environment.port or 8080)` |
 | `errorMessage` | print route http error.toString() | `boolean` | `true` |
+| `errorMessage` | print route http error.stack | `boolean` | `false` |
 | `maxRouteCache` | the max size of route lookup lru cache | `number` | `10000` |
-
+|  `qsParser` | function for parsing querystring |`(query:string)=>{[index:string]:any}` | `querystring` |
 ## Usage
 ```typescript
-import {createApp}  from 'appolo';
+import {createApp}  from '@appolo/core';
 (async ()=>{
     let app = await createApp({
         paths:[ 'src'],

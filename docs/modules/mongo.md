@@ -3,7 +3,7 @@ id: mongo
 title: Mongo
 sidebar_label: Mongo
 ---
-Mongo module for [`appolo`](https://github.com/shmoop207/appolo) built with [appolo-mongo](https://github.com/shmoop207/appolo-mongo) and [mongoose](https://mongoosejs.com/)
+Mongo module built with [appolo-mongo](https://github.com/shmoop207/appolo-mongo) and [mongoose](https://mongoosejs.com/)
 
 ## Installation
 
@@ -34,14 +34,16 @@ in config/modules/all.ts
 import {MongoModule} from '@appolo/mongo';
 
 export = async function (app: App) {
-    await app.module(new MongoModule({connection:"mongo://mongo-connection-string"}));
+    app.module.use(MongoModule.for({
+        connection:"mongo://mongo-connection-string"
+    }));
     
 }
 ```
 
 ## Usage
 ```typescript
-import {define, singleton} from 'appolo'
+import {define, singleton} from '@appolo/inject'
 import {schema,prop,Model,model,Ref,injectModel,Doc} from "@appolo/mongo";
 
 @model()
@@ -132,7 +134,7 @@ export class User{
 ```
 
 ### ref
-add ref to  another mongoose schema
+add a ref to  another mongoose schema
 the ref schema must be defined as model with `model` 
 ```typescript
 @model()
@@ -399,7 +401,7 @@ with modelRepository you can access to the mongoose connection and all the model
 getter return mongoose connection
 
 ### getModel
-#### getModel<T>(model: typeof Schema): Model<T>
+#### getModel<T\>(model: typeof Schema): Model<T\>
 return mongoose model by schema type
 ```typescript
 @define()

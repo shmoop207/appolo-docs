@@ -3,9 +3,7 @@ id: cache
 title: Cache
 sidebar_label: Cache
 ---
-Cache module for [`appolo`](https://github.com/shmoop207/appolo).
-
-Cache methods results using [`appolo-cache​`](https://github.com/shmoop207/appolo-cache) with optional redis store
+Cache methods results using [`appolo-cache`](https://github.com/shmoop207/appolo-cache) with optional redis store
 
 ## Installation
 
@@ -30,10 +28,10 @@ in config/modules/all.ts
 import {CacheModule} from '@appolo/cache';
 
 export = async function (app: App) {
-    await app.module(new CacheModule({maxSize:100}));
+    await app.module.use(CacheModule.for({maxSize:100}));
 
    // or with redis store
-   await app.module(new CacheModule({db:true,connection:"redis://redis-connection-string"}));
+   app.module.use(CacheModule.for({db:true,connection:"redis://redis-connection-string"}));
 
 }
 ```
@@ -56,11 +54,12 @@ export = async function (app: App) {
 | `memory` | true to use memory store  | `boolean`|  `true`|
 | `db` | true to use redis store  | `boolean`|  `false`|
 | `dbMaxAge` | set maximum age in ms of all cache items in db if not defined maxAge will be used  | `number` | `unlimited` |
+| `cacheNull` | cache null results  | `boolean` | `false` |
 
 
 ## Usage
 ```typescript
-import { define } from 'appolo';
+import { define } from '@appolo/inject';
 import { cache } from '@appolo/cache';
 
 @define()
@@ -81,7 +80,7 @@ export class SomeClass {
 
     // will try to get items from memroy with expire
     // of 1 minute then from redis with expire of one hour
-    @cache({db:true,maxAge:60*1000,:dbMaxAge:60*1000*60})
+    @cache({db:true,maxAge:60*1000,dbMaxAge:60*1000*60})
     async method3(key:string) {
         let result = await doSomeThingAsync(key)
             return result;
@@ -98,6 +97,27 @@ export class SomeClass {
 ```
 
 ## CacheProvider
+
+```typescript
+import { define,inject } from '@appolo/inject';
+import { cacheProvider } from '@appolo/cache';
+
+@define()
+export class SomeClass {
+    @inject() cacheProvider:CacheProvider
+    
+    @cache({id:"someId"})
+    method() {
+       return ++this.counter
+    }
+
+    someMethod(){
+       this.cacheProvider.getCacheById("someId").clear()
+    }
+}
+
+```
+
 ### createCache
 #### `createCache(options: ICacheOptions, valueFn: Function, scope?: any)`
 create new cache wrapper

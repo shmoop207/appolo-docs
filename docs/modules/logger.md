@@ -3,7 +3,7 @@ id: logger
 title: Logger
 sidebar_label: Logger
 ---
-logger module for appolo build with [pino](https://github.com/pinojs/pino) and [sentry](https://sentry.io)
+logger module for appolo build with [pino](https://github.com/pinojs/pino)
 
 ## Installation
 
@@ -14,20 +14,32 @@ npm i @appolo/logger
 ## Options
 | key | Description | Type | Default
 | --- | --- | --- | --- |
-| `prettyInProduction` | pretty print in production env if false will use `JSON.strigify`  | `boolean`|  `false`|
-| `sentry` | optional object to define sentry | `object` | `null` |
-| `sentry.dsn` | sentry dsn url | `string` | `null` |
-| `sentry.opts` | sentry object [options](https://docs.sentry.io/clients/node/config/)| `object` | `{}` |
+| `id` | logger id  | `string`|  `logger`|
+| `level` | base log level  | `Log.Level`|  `info`|
+| `transports` | optional ICustomTransport array | `array` | `null` |
 
 in config/modules/all.ts
+
 
 ```typescript
 import {LoggerModule} from '@appolo/logger';
 
 export = async function (app: App) {
-   await app.module(LoggerModule);
-   //or with sentry
-   await app.module(new LoggerModule({sentry:{dns:"http://sentry-dsn"}});
+   await app.module.use(LoggerModule);
+    // or with custom transport
+    await app.module.load(LoggerModule.for({transports:[MyCustomTransport]}));
+}
+```
+
+```typescript
+export class MyCustomTransport {
+
+    initialize(): Promise<void>{
+    }
+
+    log(level: Level, msg: string, args: PlainObject){
+        console.log(level,msg,args)
+    }
 }
 ```
 
@@ -37,7 +49,7 @@ now logger instance can be inject
 import {ILogger} from '@appolo/logger';
 
 @define()
-export class SomeManager(){
+export class SomeManager{
     @inject() logger:Ilogger
 
     someMethod(){
@@ -55,7 +67,7 @@ static logger
 import {Logger} from '@appolo/logger';
 
 @define()
-export class SomeManager(){
+export class SomeManager{
 
     someMethod(){
         try{
@@ -69,8 +81,8 @@ export class SomeManager(){
 ```
 
 ## API
-#### `error(msg: string, ...args: any[])`
-#### `warn(msg: string, ...args: any[])`
-#### `fatal(msg: string, ...args: any[])`
-#### `info(msg: string, ...args: any[])`
-#### `debug(msg: string, ...args: any[]`
+#### `error( msg: string, args: PlainObject)`
+#### `warn( msg: string, args: PlainObject)`
+#### `fatal( msg: string, args: PlainObject)`
+#### `info( msg: string, args: PlainObject)`
+#### `debug( msg: string, args: PlainObject)`

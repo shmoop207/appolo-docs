@@ -3,7 +3,7 @@ id: pubsub
 title: PubSub
 sidebar_label: PubSub
 ---
-pubsub module for `appolo` built with [ioredis](https://github.com/luin/ioredis#pubsub)
+pubsub module built with [ioredis](https://github.com/luin/ioredis#pubsub)
 
 ## Installation
 
@@ -24,7 +24,9 @@ in config/modules/all.ts
 import {PubSubModule} from '@appolo/pubsub';
 
 export = async function (app: App) {
-   await app.module(new PubSubModule({connection:"redis://redis-connection-string"}));
+    app.module.use(PubSubModule.for({
+        connection:"redis://redis-connection-string"
+    }));
 }
 ```
 
@@ -32,26 +34,14 @@ export = async function (app: App) {
 
 ### Publisher
 ```typescript
-import {define, singleton} from 'appolo'
-import {publisher} from "@appolo/pubsub";
+import {define, singleton} from '@appolo/inject'
+import {PubSubProvider} from "@appolo/pubsub";
 
 @define()
 @singleton()
 export class SomePublisher {
 
-    @publisher("test")
-    async publish(data: any): Promise<any> {
-        return data
-    }
-}
-```
-Or with PubSubProvider
-```typescript
-@define()
-@singleton()
-export class SomePublisher {
-
-    inject() pubSubProvider:PubSubProvider
+    @inject() pubSubProvider:PubSubProvider
 
     async publish(data:any): Promise<any> {
         return this.pubSubProvider.publish("test",data)
@@ -61,7 +51,7 @@ export class SomePublisher {
 ```
 ### Handler
 ```typescript
-import {define, singleton} from 'appolo'
+import {define, singleton} from '@appolo/inject'
 import {handler} from "@appolo/pubsub";
 
 @define()

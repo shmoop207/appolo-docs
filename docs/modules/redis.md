@@ -3,11 +3,11 @@ id: redis
 title: Redis
 sidebar_label: Redis
 ---
-Redis module for [`appolo`](https://github.com/shmoop207/appolo) built with [ioredis](https://github.com/luin/ioredis)
+Redis module  built with [ioredis](https://github.com/luin/ioredis)
 
 ## Installation
 
-```typescript
+```npm
 npm i @appolo/redis
 ```
 
@@ -32,10 +32,12 @@ in config/modules/all.ts
 import {RedisModule} from '@appolo/redis';
 
 export = async function (app: App) {
-    await app.module(new RedisModule({connection:"redis://redis-connection-string"}));
+     app.module.use(RedisModule.for({
+        connection:"redis://redis-connection-string"
+    }));
 
     //or with custom lua script
-    await app.module(new RedisModule({
+    app.module.use( RedisModule.for({
         connection:"redis://redis-connection-string",
         scripts:[{
             name:'echo',
@@ -49,7 +51,7 @@ export = async function (app: App) {
 
 ## Usage
 ```typescript
-import {define, singleton} from 'appolo'
+import {define, singleton} from '@appolo/inject'
 import {RedisProvider} from "@appolo/redis";
 
 @define()
@@ -153,7 +155,7 @@ increment value by count and expire in seconds
 
 ### lock
 ##### `lock(key: string, seconds: number, updateLockTime: boolean = false): Promise<boolean>`
-return true if value is locked if not lock it for x seconds
+return true if value  locked, if not lock it for x seconds
 #### unlock
 #### `unlock(key: string): Promise<void>`
 unlock key

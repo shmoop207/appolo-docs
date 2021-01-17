@@ -5,7 +5,7 @@ sidebar_label: Context
 ---
 Request context module for appolo build with [appolo-context](https://github.com/shmoop207/appolo-context) and `async_hooks`.
 
-> new context will be create for every request
+> new context will be created for every request
 
 ## Installation
 
@@ -24,7 +24,7 @@ in config/modules/all.ts
 import {ContextModule} from '@appolo/context';
 
 export = async function (app: App) {
-   await app.module(ContextModule);
+   app.module.user(ContextModule);
 }
 ```
 
@@ -32,6 +32,7 @@ export = async function (app: App) {
 first define your context using the `@context` decorator
 ```typescript
 import {context} from '@appolo/context';
+import {inject} from '@appolo/inject';
 
 @context()
 export class MyContext {
@@ -70,7 +71,7 @@ export class UserMiddleware extends Middleware {
 
 ```
 Now we can access the context from any class using `@inject context`
-> note that the context is uniq for every request and can not share data between requests
+> note that the context is uniq for every request and cannot share data between requests
 
 ```typescript
 @define()
@@ -94,7 +95,6 @@ export class ContextController extends Controller {
     @inject() someManager: Manager;
 
     @get("/test/context/")
-    @validation("userName", validator.string().required())
     @middleware(UserMiddleware)
     async test(req: IRequest, res: IResponse) {
 

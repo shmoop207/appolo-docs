@@ -3,7 +3,7 @@ id: queue
 title: Queue
 sidebar_label: Queue
 ---
-queue module for `appolo` built with [`appolo-queue`](https://github.com/shmoop207/appolo-queue)
+queue module  built with [`appolo-queue`](https://github.com/shmoop207/appolo-queue)
 
 ## Installation
 
@@ -32,7 +32,7 @@ in config/modules/all.ts
 import {QueueModule} from '@appolo/queue';
 
 export = async function (app: App) {
-    await app.module(new QueueModule({
+    await app.module.use(QueueModule.for({
         config:{
             redis:"redis://redis-connection-string",
             queueName:"myQueue"
@@ -44,7 +44,7 @@ export = async function (app: App) {
 ## Usage
 
 ```typescript
-import {define, singleton,inject} from 'appolo'
+import {define, singleton,inject} from '@appolo/inject'
 import {Queue} from "@appolo/queue";
 
 @define()
@@ -61,7 +61,7 @@ export class SomeManager {
 ```
 In  task handler the name of the handler must be the same as `queue.create`
 ```typescript
-import {define, inject} from 'appolo'
+import {define, inject} from '@appolo/inject'
 import {Job,handler} from "@appolo/queue";
 
 @define()

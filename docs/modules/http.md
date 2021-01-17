@@ -3,7 +3,7 @@ id: http
 title: HTTP Service
 sidebar_label: Http
 ---
-http service module for [`appolo`](https://github.com/shmoop207/appolo) build with [axios](https://github.com/axios/axios)
+http service module  build with [axios](https://github.com/axios/axios)
 
 ## Installation
 
@@ -25,14 +25,17 @@ any option from `Request Config` can be added and will be added to all request.
 import {HttpModule} from '@appolo/http';
 
 export = async function (app: App) {
-   await app.module(new HttpModule({baseURL:"https://some-domain.com/api/",retry:2}));
+    app.module.usage(HttpModule.for({
+        baseURL:"https://some-domain.com/api/",
+        retry:2
+    }));
 }
 ```
 
 ## Usage
 
 ```typescript
-import {define, singleton,inject} from 'appolo'
+import {define, singleton,inject} from '@appolo/inject'
 import {publisher} from "@appolo/http";
 
 @define()
@@ -44,9 +47,9 @@ export class SomeManager {
     async getUserId(): Promise<string> {
 
         let result = await this.httpService.request<{userId:string}>({
-            url:"http://someurl"
-            method:"post"
-            timeout:1000
+            url:"http://someurl",
+            method:"post",
+            timeout:1000,
             retry:3
         })
 
@@ -71,6 +74,7 @@ export class SomeManager {
 | `responseEncoding` | indicates encoding to use for decoding responses | `string` | `utf8` |
 | `maxRedirects` |  defines the maximum number of redirects to follow in node.js | `number` | `5` |
 | `retry` | retry  times on requests that return a response (500, etc) before giving up | `number` | `0` |
-| `noResponseRetries` |  etry times on errors that don't return a response (ENOTFOUND, ETIMEDOUT, etc) | `number` | `0` |
+| `noResponseRetries` |  retry times on errors that don't return a response (ENOTFOUND, ETIMEDOUT, etc) | `number` | `0` |
 | `retryDelay` |  Milliseconds to delay at first | `number` | `100` |
+| `fallbackUrls` |  retry on fallback urls | `string[]` | `[]]` |
 

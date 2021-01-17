@@ -4,7 +4,7 @@ title: Environments
 sidebar_label: Environments
 ---
 
-With environments you can define different configurations depending on the environment type your app is currently running.
+With environments, you can define different configurations depending on the environment type your app is currently running.
 
 It is recommended to have 4 types of environments: `development`, `testing`, `staging`, `production`.
 After `app.launch` you can always access the current environment vars via `app.env`.
@@ -33,7 +33,7 @@ export = {
 ```
 If we launch our app.js with `NODE_ENV = testing`
 ```typescript
-import {createApp}  from 'appolo';
+import {createApp}  from '@appolo/core';
 ...
 let app = await createApp().launch();
 var env = app.env;
@@ -43,7 +43,7 @@ console.log(env.name,env.someVar,env.db) // 'testing someVar monog://testing-url
 ## Env Injection
 the env object can be injected to any class.
 ```typescript
-import {define,initMethod,inject} from 'appolo';
+import {define,initMethod,inject} from '@appolo/inject';
 
 @define()
 export class BaseManager {
