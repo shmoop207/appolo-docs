@@ -9,7 +9,8 @@ Some useful decorators you can use on any method
 ## Before
 run before class method before any method
 ```typescript
-import {define,inject,before} from '@appolo/helpers';
+import {before} from '@appolo/helpers';
+import {define,inject} from '@appolo/inject';
 @define()
 export class SomeBefore  {
     public async run(data){
@@ -34,7 +35,8 @@ export class SomeManager{
 ## After
 run after class method before any method
 ```typescript
-import {define,inject,before} from '@appolo/helpers';
+import {before} from '@appolo/helpers';
+import {define,inject} from '@appolo/inject';
 @define()
 export class SomeAfter  {
     public async run(counter){

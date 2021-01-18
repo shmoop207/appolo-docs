@@ -3,8 +3,8 @@ id: modules
 title: Modules
 sidebar_label: Modules
 ---
-App modules can be defined in `config/modules` same as the middlware config
-The modules configuration file is called after the environment files loaded.
+App modules can be defined in `config/modules` same as the middleware config.
+Modules configuration file is called after the environment files loaded.
 >Modules are loaded by order
 
 ```typescript title="config/modules/all.ts"

@@ -8,13 +8,13 @@ Controllers are classes that handle routes request.
 In order for the router to be able to handle the request, a controller class must extend `Controller`.
 Each controller action will be called with `IRequest` and `IResponse` objects.
 
-controller action can return a promise or an object that will be passed to `res.send(someData)` with status code 200
+controller action can return a promise, or an object that will be passed to `res.send(someData)` with status code 200
 
 ## Request Controller
 By default, `appolo` creates a new controller instance for every request.
 ```typescript
-import {inject,Controller} from '@appolo/inject';
 import {controller,Controller,IRequest,IResponse,post,get} from '@appolo/route';
+import {inject} from '@appolo/inject';
 
 @controller()
 export class LoginController extends Controller{
