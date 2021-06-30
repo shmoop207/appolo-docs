@@ -48,7 +48,7 @@ import {schema,prop,Model,model,Ref,injectModel,Doc} from "@appolo/mongo";
 
 @model()
 @schema("User",{strict:true})
-export class User{
+export class User extends Schema{
     @prop({type:String})
     name:string
     
@@ -57,7 +57,7 @@ export class User{
 }
 
 @schema()
-export class Address{
+export class Address extends Schema{
     @prop({type:String})
     street:string
     
@@ -67,7 +67,7 @@ export class Address{
 
 @model()
 @schema()
-export class Comment{
+export class Comment extends Schema{
     @prop({type:String})
     text:string
     
@@ -80,7 +80,7 @@ export class Comment{
 @singleton()
 export class SomeManager {
 
-    @injectModel(User) userModel:Model<User>;
+    @model(User) userModel:Model<User>;
 
     async getUser(id:string): Promise<Doc<User>> {
         let user = await this.userModel.findById(id)
@@ -97,7 +97,7 @@ export class SomeManager {
 define new schema with collectionName and mongose schema [options](https://mongoosejs.com/docs/guide.html#options)
 ```typescript
 @schema("User",{strict:true})
-export class User{
+export class User extends Schema{
     @prop({type:String})
     name:string
     
@@ -117,7 +117,7 @@ define sumDocument
 
 ```typescript
 @schema()
-export class Address{
+export class Address extends Schema{
     @prop({type:String})
     street:string
     
@@ -127,7 +127,7 @@ export class Address{
 
 
 @schema()
-export class User{
+export class User extends Schema{
     @prop(Address)
     address:Address
 }
@@ -139,14 +139,14 @@ the ref schema must be defined as model with `model`
 ```typescript
 @model()
 @schema()
-export class User{
+export class User extends Schema{
     @prop()
     name:string
 }
 
 @model()
 @schema()
-export class Comment{
+export class Comment extends Schema{
     @prop({ref:User})
     user:Ref<User>
 }
@@ -265,7 +265,7 @@ static findByName(this: Model<User>, name: string) {
 @singleton()
 export class SomeManager {
 
-    @injectModel(User) userModel:Model<User> & typeof User;
+    @model(User) userModel:Model<User> & typeof User;
 
     async getUser(name:string): Promise<Doc<User>> {
         let user = await this.userModel.findByName(name)
@@ -293,7 +293,7 @@ define mongoose pre [hooks](https://mongoosejs.com/docs/middleware.html)
 the pre function will be executed before the defined hook 
 ```typescript
 @schema("User",{strict:true})
-export class User{
+export class User extends Schema{
     @prop({type:String})
     name:string
     
@@ -312,7 +312,7 @@ define mongoose post [hooks](https://mongoosejs.com/docs/middleware.html)
 the post function will be executed after the defined hook 
 ```typescript
 @schema("User",{strict:true})
-export class User{
+export class User extends Schema{
     @prop({type:String})
     name:string
     
@@ -330,7 +330,7 @@ register new schema model
 ```typescript
 @model()
 @schema("User",{strict:true})
-export class User{
+export class User extends Schema{
     @prop({type:String})
     name:string
 }
@@ -342,7 +342,7 @@ inject model to class
 @singleton()
 export class SomeManager {
 
-    @injectModel(User) userModel:Model<User>;
+    @model(User) userModel:Model<User>;
 
     async getUser(id:string): Promise<Doc<User>> {
         let user = await this.userModel.findById(id)
@@ -357,7 +357,7 @@ get the defined collection name on schema
 ```typescript
 @model()
 @schema("User",{strict:true})
-export class User{
+export class User extends Schema{
     @prop({type:String})
     name:string
 }
@@ -370,7 +370,7 @@ return mongoose schema object
 ```typescript
 @model()
 @schema("User",{strict:true})
-export class User{
+export class User extends Schema{
     @prop({type:String})
     name:string
 }
@@ -384,7 +384,7 @@ define and mongoose model instance by mongoose connection
 ```typescript
 @model()
 @schema("User",{strict:true})
-export class User{
+export class User extends Schema{
     @prop({type:String})
     name:string
 }

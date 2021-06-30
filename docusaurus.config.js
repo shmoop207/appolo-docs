@@ -124,7 +124,7 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/shmoop/appolo-docs/edit/master/website/',
+            'https://github.com/shmoop/appolo-docs2/edit/master/website/',
         },
         // blog: {
         //   showReadingTime: true,
